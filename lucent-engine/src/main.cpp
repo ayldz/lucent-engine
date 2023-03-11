@@ -6,7 +6,7 @@
 
 int main()
 {
-	lucent::Window window{ "Lucent - Game Engine",960,768 };
+	lucent::Window window{ "Lucent Engine",960,768 };
 	window.Update();
 
 	return 0;
