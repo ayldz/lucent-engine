@@ -9,8 +9,6 @@ namespace lucent
 		glfwTerminate();
 	}
 	
-
-
 	void Window::Init()
 	{
 		m_isClosed = false;
