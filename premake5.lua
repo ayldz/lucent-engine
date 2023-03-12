@@ -4,3 +4,4 @@ workspace "Lucent"
 	
 	
 	include "Lucent"
+	include "Lucent/libs/GLFW"

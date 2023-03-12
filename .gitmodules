@@ -1,0 +1,3 @@
+[submodule "Lucent/libs/GLFW"]
+	path = Lucent/libs/GLFW
+	url = https://github.com/ayldz/glfw.git
