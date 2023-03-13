@@ -2,6 +2,18 @@
 
 namespace lucent
 {
+	Window::Window(std::string_view title, int width, int height)
+		: m_title{ title }, m_width{ width }, m_height{ height }
+	{
+		if (!glfwInit())
+		{
+			std::cout << "glfw cannot be initialized." << std::endl;
+		}
+		else
+		{
+			Init();
+		}
+	}
 
 	Window::~Window()
 	{
@@ -19,6 +31,12 @@ namespace lucent
 		}
 
 		glfwMakeContextCurrent(m_wHandle);
+
+		if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress))
+		{
+			std::cout << "Failed to initialize GLAD" << std::endl;
+		}
+
 		glfwSetKeyCallback(m_wHandle, 
 			[](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
@@ -37,13 +55,7 @@ namespace lucent
 
 			glClearColor(0.6f, 0.8f, 0.6f, 1.0f);
 
-			glBegin(GL_TRIANGLES);
-
-			glVertex2f(-0.5f, -0.5f);
-			glVertex2f(0.5f, -0.5f);
-			glVertex2f(0.0f, 0.5f);
-
-			glEnd();
+		
 
 			glfwSwapBuffers(m_wHandle);
 			glfwPollEvents();

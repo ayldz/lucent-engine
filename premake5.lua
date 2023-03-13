@@ -4,6 +4,7 @@ workspace "Lucent"
 	
 	group "Libs"
 		include "Lucent/libs/GLFW"
+		include "Lucent/libs/Glad"
 	group ""
 	
 	include "Lucent"

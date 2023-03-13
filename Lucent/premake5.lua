@@ -17,12 +17,14 @@ project "Lucent"
 	
 	includedirs
 	{
-		"libs/GLFW/include"
+		"libs/GLFW/include",
+		"libs/Glad/include"
 	}
 	
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 	

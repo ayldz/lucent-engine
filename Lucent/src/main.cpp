@@ -4,9 +4,11 @@
 
 #include "window.h"
 
+using namespace lucent;
+
 int main()
 {
-	lucent::Window window{ "Lucent Engine",960,768 };
+	Window window{ "Lucent Engine",968,768 };
 	window.Update();
 
 	return 0;

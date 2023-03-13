@@ -3,6 +3,7 @@
 #include <string>
 #include <string_view>
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace lucent
@@ -20,24 +21,13 @@ namespace lucent
 		bool m_isClosed{};
 
 	public:
-		Window(std::string_view title, int width, int height)
-			: m_title{ title }, m_width{ width }, m_height{ height } 
-		{
-			if (!glfwInit())
-			{
-				std::cout << "glfw cannot be initialized." << std::endl;
-			}
-			else
-			{
-				Init();
-			}
-		}
+		Window(std::string_view, int, int);
 
 		virtual ~Window();
 
 		void Update();
 
-		void SetTitle(std::string_view title);
+		void SetTitle(std::string_view);
 	
 	private:
 		void Init();
