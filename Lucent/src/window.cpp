@@ -37,6 +37,8 @@ namespace lucent
 			std::cout << "Failed to initialize GLAD" << std::endl;
 		}
 
+		glViewport(0,0,m_width, m_height);
+
 		glfwSetKeyCallback(m_wHandle, 
 			[](GLFWwindow* window, int key, int scancode, int action, int mods)
 			{
