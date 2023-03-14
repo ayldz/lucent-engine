@@ -4,3 +4,6 @@
 [submodule "Lucent/libs/glm"]
 	path = Lucent/libs/glm
 	url = https://github.com/ayldz/glm.git
+[submodule "Lucent/libs/stb"]
+	path = Lucent/libs/stb
+	url = https://github.com/nothings/stb.git
