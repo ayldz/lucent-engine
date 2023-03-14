@@ -9,7 +9,8 @@ project "Lucent"
 		"src/**.h",
 		"src/**.cpp",
 		"libs/glm/**.hpp",
-		"libs/glm/**.inl"
+		"libs/glm/**.inl",
+		"libs/stb/stb_image.h"
 	}
 	
 	defines
@@ -21,7 +22,8 @@ project "Lucent"
 	{
 		"libs/GLFW/include",
 		"libs/Glad/include",
-		"libs/glm"
+		"libs/glm",
+		"libs/stb"
 	}
 	
 	links
