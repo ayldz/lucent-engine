@@ -1,5 +1,6 @@
 workspace "Lucent"
 	architecture "x64"
+	startproject "Lucent"
 	configurations {"Debug", "Release"}
 	
 	group "Libs"

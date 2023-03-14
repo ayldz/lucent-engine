@@ -8,7 +8,7 @@ using namespace lucent;
 
 int main()
 {
-	Window window{ "Lucent Engine",968,768 };
+	Window window{ "Lucent Engine" , 960 , 540};
 	window.Update();
 
 	return 0;

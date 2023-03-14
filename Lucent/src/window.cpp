@@ -2,7 +2,7 @@
 
 namespace lucent
 {
-	Window::Window(std::string_view title, int width, int height)
+	Window::Window(std::string_view title , int width , int height )
 		: m_title{ title }, m_width{ width }, m_height{ height }
 	{
 		if (!glfwInit())
@@ -49,13 +49,31 @@ namespace lucent
 
 	void Window::Update() 
 	{
+		float vertices[] = 
+		{
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.0f,  0.5f, 0.0f
+		};
+
+		unsigned int vbo;
+		
+		glGenBuffers(1, &vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float)*3, 0);
+		glEnableVertexAttribArray(0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 		while (!m_isClosed)
 		{
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			glClearColor(0.6f, 0.8f, 0.6f, 1.0f);
 
-		
+			glDrawArrays(GL_TRIANGLES, 0, 3);
 
 			glfwSwapBuffers(m_wHandle);
 			glfwPollEvents();

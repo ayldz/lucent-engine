@@ -1,13 +1,15 @@
 project "Lucent"
 	kind "ConsoleApp"
 	language "C++"
-	cppdialect "C++17"
-	targetdir "bin/%{cfg.buildcfg}"
+	cppdialect "C++20"
+	
 	
 	files 
 	{ 
 		"src/**.h",
 		"src/**.cpp",
+		"libs/glm/**.hpp",
+		"libs/glm/**.inl"
 	}
 	
 	defines
@@ -18,7 +20,8 @@ project "Lucent"
 	includedirs
 	{
 		"libs/GLFW/include",
-		"libs/Glad/include"
+		"libs/Glad/include",
+		"libs/glm"
 	}
 	
 	links

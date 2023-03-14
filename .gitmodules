@@ -1,3 +1,6 @@
 [submodule "Lucent/libs/GLFW"]
 	path = Lucent/libs/GLFW
 	url = https://github.com/ayldz/glfw.git
+[submodule "Lucent/libs/glm"]
+	path = Lucent/libs/glm
+	url = https://github.com/ayldz/glm.git
