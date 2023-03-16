@@ -1,8 +1,12 @@
 #include "window.h"
 
+
+
+
+
 namespace lucent
 {
-	Window::Window(std::string_view title , int width , int height )
+	Window::Window(std::string_view title = "Lucent Engine", int width = 960, int height = 540)
 		: m_title{ title }, m_width{ width }, m_height{ height }
 	{
 		if (!glfwInit())
@@ -47,35 +51,30 @@ namespace lucent
 					glfwSetWindowShouldClose(window, true);
 				}
 			});
+
+		glfwSetCursorPosCallback(m_wHandle, Input::CursorPositionCallback);
+		glfwSetMouseButtonCallback(m_wHandle, Input::MouseButtonCallback);
+		glfwSetKeyCallback(m_wHandle, Input::KeyCallback);
 	}
 
 	void Window::Update() 
 	{
-		float vertices[] = 
-		{
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
-		};
-
-		unsigned int vbo;
-		
-		glGenBuffers(1, &vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float)*3, 0);
-		glEnableVertexAttribArray(0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		Sprite sp{};
+		SpriteRenderer renderer{sp};
 
 		while (!m_isClosed)
 		{
-			glClear(GL_COLOR_BUFFER_BIT);
+			renderer.Render();
 
-			glClearColor(0.6f, 0.8f, 0.6f, 1.0f);
+			if (Input::GetMouseButton(0))
+			{
+				std::cout << "Mouse Button 0" << std::endl;
+			}
 
-			glDrawArrays(GL_TRIANGLES, 0, 3);
+			if (Input::GetButton(GLFW_KEY_SPACE))
+			{
+				std::cout << "Space key is pressed.." << std::endl;
+			}
 
 			glfwSwapBuffers(m_wHandle);
 			glfwPollEvents();

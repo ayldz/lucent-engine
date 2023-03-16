@@ -6,6 +6,10 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "../graphics/sprite.h"
+#include "../graphics/sprite_renderer.h"
+#include "input.h"
+
 namespace lucent
 {
 	class Window
@@ -21,7 +25,7 @@ namespace lucent
 		bool m_isClosed{};
 
 	public:
-		Window(std::string_view, int, int);
+		Window(std::string_view title, int, int);
 
 		virtual ~Window();
 
