@@ -1,17 +1,21 @@
 #pragma once
 
 #include "sprite.h"
+#include "shader.h"
 
 #include "glad/glad.h"
+
 
 class SpriteRenderer 
 {
 private: 
 	Sprite m_sprite{};
 
-	unsigned int vbo;
-	unsigned int vao;
-	unsigned int ebo;
+	unsigned int m_vbo{};
+	unsigned int m_vao{};
+	unsigned int m_ebo{};
+
+	Shader shader{};
 
 public:
 

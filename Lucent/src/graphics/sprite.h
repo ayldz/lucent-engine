@@ -21,4 +21,6 @@ public:
 	//void Render() const;
 
 	inline const std::vector<float>& GetVertices() const { return vertices; };
+	inline const std::vector<int>& GetTriangles() const { return triangles; };
+
 };

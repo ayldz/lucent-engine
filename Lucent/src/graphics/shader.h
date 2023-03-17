@@ -1,8 +1,9 @@
 #pragma once
 
+#include <glad/glad.h>
 #include <string>
 
-class Shader 
+class Shader
 {
 private:
 	unsigned int m_vertexshader;
@@ -13,13 +14,14 @@ private:
 	std::string m_fragmentshadersrc;
 
 public:
-	Shader();
+	Shader() = default;
 	~Shader();
 
+	void Prepare();
 	void Bind() const;
 	void Unbind() const;
 
 private:
-	const std::string& GetVertexShaderSource() const { return m_vertexshadersrc; }
-	const std::string& GetVertexFragmentSource() const { return m_fragmentshadersrc; }
+	const std::string& GetVertexShaderSource();
+	const std::string& GetFragmentShaderSource();
 };

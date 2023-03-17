@@ -43,15 +43,6 @@ namespace lucent
 
 		glViewport(0,0,m_width, m_height);
 
-		glfwSetKeyCallback(m_wHandle, 
-			[](GLFWwindow* window, int key, int scancode, int action, int mods)
-			{
-				if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-				{
-					glfwSetWindowShouldClose(window, true);
-				}
-			});
-
 		glfwSetCursorPosCallback(m_wHandle, Input::CursorPositionCallback);
 		glfwSetMouseButtonCallback(m_wHandle, Input::MouseButtonCallback);
 		glfwSetKeyCallback(m_wHandle, Input::KeyCallback);
@@ -61,6 +52,8 @@ namespace lucent
 	{
 		Sprite sp{};
 		SpriteRenderer renderer{sp};
+
+		renderer.Prepare();
 
 		while (!m_isClosed)
 		{
@@ -86,6 +79,7 @@ namespace lucent
 	void Window::SetTitle(std::string_view title)
 	{
 		m_title = title;
+		glfwSetWindowTitle(m_wHandle, m_title.c_str());
 	}
 
 }
