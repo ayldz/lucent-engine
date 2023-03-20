@@ -21,6 +21,8 @@ public:
 	void Bind() const;
 	void Unbind() const;
 
+	inline unsigned int GetID() const { return m_shaderprogram; }
+
 private:
 	const std::string& GetVertexShaderSource();
 	const std::string& GetFragmentShaderSource();

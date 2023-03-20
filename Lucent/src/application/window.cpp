@@ -69,6 +69,11 @@ namespace lucent
 				std::cout << "Space key is pressed.." << std::endl;
 			}
 
+			if (Input::GetButton(GLFW_KEY_ESCAPE))
+			{
+				glfwSetWindowShouldClose(m_wHandle, true);
+			}
+
 			glfwSwapBuffers(m_wHandle);
 			glfwPollEvents();
 

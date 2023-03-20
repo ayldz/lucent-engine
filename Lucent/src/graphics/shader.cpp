@@ -41,10 +41,21 @@ const std::string& Shader::GetVertexShaderSource()
 	m_vertexshadersrc = ""
 		"#version 300 es\n"
 		"layout(location = 0) in vec3 aPos;\n"
+		"layout(location = 1) in vec3 aColor;\n"
+		"layout(location = 2) in vec2 aTexCoord;\n"
+
+		"out vec3 ourColor;\n"
+		"out vec2 TexCoord;\n"
+
+		"uniform mat4 model;\n"
+		"uniform mat4 projection;\n"
+		"uniform mat4 view;\n"
 
 		"void main()\n"
 		"{\n"
-		"gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+		"gl_Position = projection  * model *vec4(aPos, 1.0);\n"
+		"ourColor=aColor;\n"
+		"TexCoord=aTexCoord;\n"
 		"}\n";
 
 	return m_vertexshadersrc;
@@ -57,9 +68,14 @@ const std::string& Shader::GetFragmentShaderSource()
 		"#version 300 es\n"
 		"out vec4 FragColor;\n"
 
+		"in vec3 ourColor;\n"
+		"in vec2 TexCoord;\n"
+
+		"uniform sampler2D texture1;\n"
+
 		"void main()\n"
 		"{\n"
-		"FragColor = vec4(1.0f, 0.2f, 8.0f, 1.0f);\n"
+		"FragColor = texture(texture1, TexCoord);\n"
 		"}\n";
 
 	return m_fragmentshadersrc;

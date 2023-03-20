@@ -2,6 +2,7 @@
 
 #include "sprite.h"
 #include "shader.h"
+#include "texture.h"
 
 #include "glad/glad.h"
 
