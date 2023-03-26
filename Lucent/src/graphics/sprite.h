@@ -11,8 +11,6 @@ private:
 	std::vector<float> vertices;
 	std::vector<int> triangles;
 
-
-
 public:
 	Sprite();
 	Sprite(const std::vector<float>&, const std::vector<float>&);

@@ -10,32 +10,33 @@
 #include "../graphics/sprite_renderer.h"
 #include "input.h"
 
-namespace lucent
+#include "../core/scene.h"
+
+
+class Window
 {
-	class Window
-	{
-	private:
+private:
 
-		GLFWwindow* m_wHandle{};
+	GLFWwindow* m_wHandle{};
 
-		int m_width{};
-		int m_height{};
-		std::string m_title{};
+	int m_width{};
+	int m_height{};
+	std::string m_title{};
 
-		bool m_isClosed{};
+	bool m_isClosed{};
 
-	public:
-		Window(std::string_view title, int, int);
+public:
+	Window(std::string_view title, int, int);
 
-		virtual ~Window();
+	virtual ~Window();
 
-		void Update();
+	void Update();
 
-		void SetTitle(std::string_view);
-	
-	private:
-		void Init();
-	};
-}
+	void SetTitle(std::string_view);
+
+private:
+	void Init();
+};
+
 
 

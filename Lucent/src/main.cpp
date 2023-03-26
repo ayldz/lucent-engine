@@ -2,8 +2,6 @@
 
 #include "application/window.h"
 
-using namespace lucent;
-
 int main()
 {
 	Window window{"Lucent Engine", 960, 540};

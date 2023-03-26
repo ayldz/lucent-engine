@@ -4,4 +4,4 @@
 
 #include "../application/input.h"
 
-lucent::Input* lucent::Input::instance = nullptr;
+Input* Input::instance = nullptr;

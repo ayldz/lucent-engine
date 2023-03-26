@@ -1,15 +1,5 @@
 #include "sprite_renderer.h"
-#include "stb_image.h"
 
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <iostream>
-
-#include "camera.h"
 
 SpriteRenderer::SpriteRenderer(const Sprite& sprite) : m_sprite{ sprite }
 {
@@ -51,16 +41,13 @@ void SpriteRenderer::Prepare()
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
-	//Texture Code
+	Texture texture{ "res/container.jpg" };
 
-
-	Texture texture{"res/container.jpg"};
-	 
 	shader.Bind();
 	glUniform1i(glGetUniformLocation(shader.GetID(), "texture1"), 0);
 
 	texture.Bind();
-	
+
 }
 
 void SpriteRenderer::Render()
@@ -68,13 +55,12 @@ void SpriteRenderer::Render()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(0.6f, 0.8f, 0.6f, 1.0f);
 
+	Camera camera{ glm::vec3(0.0f) };
+
 	shader.Bind();
-
-	Camera camera{glm::vec3(0.0f)};
-
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(720.0f, 270.0f, 0.0f));
-	model = glm::scale(model, glm::vec3(100.0f, 100.0f, 100.0f));
+	model = glm::scale(model, glm::vec3(50.0f, 50.0f, 0.0f));
 	model = glm::rotate(model, -(float)glfwGetTime(), glm::vec3(0.0, 0.0f, 1.0));
 	model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
 
@@ -89,7 +75,7 @@ void SpriteRenderer::Render()
 	shader.Bind();
 	glm::mat4 model2 = glm::mat4(1.0f);
 	model2 = glm::translate(model2, glm::vec3(240.0f, 270.0f, 0.0f));
-	model2 = glm::scale(model2, glm::vec3(100.0f, 100.0f, 100.0f));
+	model2 = glm::scale(model2, glm::vec3(50.0f, 50.0f, 0.0f));
 	model2 = glm::rotate(model2, (float)glfwGetTime(), glm::vec3(0.0, 0.0f, 1.0));
 	model2 = glm::translate(model2, glm::vec3(1.0f, 0.0f, 0.0f));
 
