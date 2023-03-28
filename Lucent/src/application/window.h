@@ -25,7 +25,7 @@ private:
 	bool m_isClosed{};
 
 public:
-	Window(std::string_view title, int, int);
+	Window(int, int, std::string_view);
 	virtual ~Window();
 
 	void Update(const Scene& scene);

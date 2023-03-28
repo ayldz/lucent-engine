@@ -12,7 +12,7 @@ private:
 	Scene* m_scene;
 
 public:
-	Game();
+	Game() = default;
 	~Game();
 
 	void Init();

@@ -1,8 +1,8 @@
 #include "window.h"
 
 
-Window::Window(std::string_view title = "Lucent Engine", int width = 960, int height = 540)
-	: m_title{ title }, m_width{ width }, m_height{ height }
+Window::Window(int width = 960, int height = 540, std::string_view title = "Lucent Engine")
+	: m_width{ width }, m_height{ height }, m_title{title}
 {
 	if (!glfwInit())
 	{
@@ -46,26 +46,22 @@ void Window::Init()
 void Window::Update(const Scene& scene)
 {
 	double lastTime = glfwGetTime();
-	unsigned int fpsCounter = 0;
-	double lag = 0.0;
+	double elapsedTime = 0.0;
 
 	while (!m_isClosed)
 	{
 		double current = glfwGetTime();
 		double deltaTime = current - lastTime;
 
-		fpsCounter++;
-		lag += deltaTime;
+		std::string FPS = std::to_string(static_cast<int>(1.0 / deltaTime));
+		std::string title = "Lucent Engine | FPS : " + FPS;
 
-		if (lag >= 1.0 )
+		elapsedTime += deltaTime;
+
+		if (elapsedTime >= 0.5)
 		{
-			std::string FPS = std::to_string((1.0 / deltaTime) * fpsCounter);
-			std::string title = "Lucent Engine | FPS : " + FPS;
-
 			SetTitle(title);
-
-			fpsCounter = 0;
-			lag = 0;
+			elapsedTime = 0.0;
 		}
 
 		scene.Update(deltaTime);

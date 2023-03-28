@@ -1,7 +1,5 @@
 #include "game.h"
 
-Game::Game() {}
-
 Game::~Game()
 {
 	delete m_window;
@@ -13,7 +11,7 @@ Game::~Game()
 
 void Game::Init()
 {
-	m_window = new Window("Lucent Engine | FPS : 0.0", 960, 540);
+	m_window = new Window(960, 540, "Lucent Engine | FPS : 0.0");
 	m_scene = new Scene();
 }
 
