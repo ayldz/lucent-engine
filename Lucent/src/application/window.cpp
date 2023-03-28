@@ -43,16 +43,32 @@ void Window::Init()
 	glfwSetKeyCallback(m_wHandle, Input::KeyCallback);
 }
 
-void Window::Update()
+void Window::Update(const Scene& scene)
 {
-	Sprite sprite;
-	SpriteRenderer spriteRenderer{ sprite };
-	Scene scene{sprite, spriteRenderer};
+	double lastTime = glfwGetTime();
+	unsigned int fpsCounter = 0;
+	double lag = 0.0;
 
 	while (!m_isClosed)
 	{
+		double current = glfwGetTime();
+		double deltaTime = current - lastTime;
 
-		scene.Update();
+		fpsCounter++;
+		lag += deltaTime;
+
+		if (lag >= 1.0 )
+		{
+			std::string FPS = std::to_string((1.0 / deltaTime) * fpsCounter);
+			std::string title = "Lucent Engine | FPS : " + FPS;
+
+			SetTitle(title);
+
+			fpsCounter = 0;
+			lag = 0;
+		}
+
+		scene.Update(deltaTime);
 
 		if (Input::GetMouseButton(0))
 		{
@@ -71,6 +87,8 @@ void Window::Update()
 
 		glfwSwapBuffers(m_wHandle);
 		glfwPollEvents();
+
+		lastTime = current;
 
 		m_isClosed = glfwWindowShouldClose(m_wHandle);
 	}

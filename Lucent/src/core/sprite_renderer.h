@@ -1,12 +1,11 @@
 #pragma once
 
-#include "sprite.h"
-#include "shader.h"
-#include "texture.h"
+#include "../graphics/sprite.h"
+#include "../graphics/shader.h"
+#include "../graphics/texture.h"
 
 #include "glad/glad.h"
 #include "stb_image.h"
-
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -20,8 +19,6 @@
 class SpriteRenderer
 {
 private: 
-	Sprite m_sprite{};
-
 	unsigned int m_vbo{};
 	unsigned int m_vao{};
 	unsigned int m_ebo{};
@@ -30,7 +27,7 @@ private:
 
 public:
 
-	SpriteRenderer(const Sprite&);
+	SpriteRenderer();
 
 	void Prepare();
 

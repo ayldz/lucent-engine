@@ -1,13 +1,18 @@
 #include "scene.h"
 
-Scene::Scene(const Sprite& sprite, const SpriteRenderer& spriteRenderer) 
-	: m_sprite{sprite}, m_spriteRenderer{spriteRenderer}
+Scene::Scene() 
 {
-	
-	m_spriteRenderer.Prepare();
+	m_renderer = new SpriteRenderer();
+	m_renderer->Prepare();
 }
 
-void Scene::Update()
+Scene::~Scene()
 {
-	m_spriteRenderer.Render();
+	delete m_renderer;
+	m_renderer = nullptr;
+}
+
+void Scene::Update(double dt) const
+{
+	m_renderer->Render();
 }

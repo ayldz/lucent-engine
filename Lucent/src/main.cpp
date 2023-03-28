@@ -1,11 +1,15 @@
 #include <iostream>
 
 #include "application/window.h"
+#include "application/game.h"
+
 
 int main()
 {
-	Window window{"Lucent Engine", 960, 540};
-	window.Update();
+	Game game{};
+
+	game.Init();
+	game.Run();
 
 	return 0;
 }

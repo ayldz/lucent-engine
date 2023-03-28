@@ -1,7 +1,7 @@
 #include "sprite_renderer.h"
 
 
-SpriteRenderer::SpriteRenderer(const Sprite& sprite) : m_sprite{ sprite }
+SpriteRenderer::SpriteRenderer() 
 {
 }
 
@@ -9,16 +9,18 @@ void SpriteRenderer::Prepare()
 {
 	shader.Prepare();
 
+	Sprite sprite{};
+
 	float vertices[32];
-	for (size_t i = 0; i < m_sprite.GetVertices().size(); i++)
+	for (size_t i = 0; i < sprite.GetVertices().size(); i++)
 	{
-		vertices[i] = m_sprite.GetVertices()[i];
+		vertices[i] = sprite.GetVertices()[i];
 	}
 
 	int triangles[6];
-	for (size_t i = 0; i < m_sprite.GetTriangles().size(); i++)
+	for (size_t i = 0; i < sprite.GetTriangles().size(); i++)
 	{
-		triangles[i] = m_sprite.GetTriangles()[i];
+		triangles[i] = sprite.GetTriangles()[i];
 	}
 
 	glGenVertexArrays(1, &m_vao);
