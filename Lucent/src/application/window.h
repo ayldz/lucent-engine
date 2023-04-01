@@ -8,10 +8,9 @@
 
 #include "../graphics/sprite.h"
 #include "../core/sprite_renderer.h"
-#include "input.h"
-
 #include "../core/scene.h"
 
+#include "input.h"
 
 class Window
 {

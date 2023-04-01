@@ -1,9 +1,16 @@
 #pragma once
 
 
+#include "entity.h"
+
 class Component 
 {
 public:
-	void Update();
+	const Entity& entity;
+
+	Component();
+
+	virtual void Start();
+	virtual void Update(float);
 
 };

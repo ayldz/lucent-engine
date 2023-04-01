@@ -1,10 +1,12 @@
 #include "entity.h"
 
-void Entity::Update()
-
+void Entity::Start()
 {
-	for (size_t i = 0; i < components.size(); i++)
-	{
-		components[i].Update();
-	}
+	for (auto component : m_components) component.Start();
+
+}
+
+void Entity::Update(float dt)
+{
+	for (auto component : m_components) component.Update(dt);
 }
