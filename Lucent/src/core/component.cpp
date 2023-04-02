@@ -13,6 +13,7 @@ const T& Entity::GetComponent(const T&)
 		if (typeid(T) == typeid(c))
 		{
 			return *c;
+
 		}
 	}
 }
