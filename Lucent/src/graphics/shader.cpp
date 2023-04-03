@@ -5,8 +5,11 @@ Shader::~Shader()
 	glDeleteProgram(m_shaderprogram);
 }
 
-void Shader::Prepare()
+void Shader::Prepare(const char* vertPath, const char* fragPath)
 {
+	m_vertexshadersrc = readShaderFile(vertPath);
+	m_fragmentshadersrc = readShaderFile(fragPath);
+
 	m_vertexshader = glCreateShader(GL_VERTEX_SHADER);
 	const char* vs = GetVertexShaderSource().c_str();
 	glShaderSource(m_vertexshader, 1, &vs , nullptr);
@@ -38,45 +41,60 @@ void Shader::Unbind() const
 
 const std::string& Shader::GetVertexShaderSource()
 {
-	m_vertexshadersrc = ""
-		"#version 300 es\n"
-		"layout(location = 0) in vec3 aPos;\n"
-		"layout(location = 1) in vec3 aColor;\n"
-		"layout(location = 2) in vec2 aTexCoord;\n"
-
-		"out vec3 ourColor;\n"
-		"out vec2 TexCoord;\n"
-
-		"uniform mat4 model;\n"
-		"uniform mat4 projection;\n"
-		"uniform mat4 view;\n"
-
-		"void main()\n"
-		"{\n"
-		"gl_Position = projection  * model *vec4(aPos, 1.0);\n"
-		"ourColor=aColor;\n"
-		"TexCoord=aTexCoord;\n"
-		"}\n";
-
 	return m_vertexshadersrc;
 }
 
 
 const std::string& Shader::GetFragmentShaderSource()
 {
-	m_fragmentshadersrc = ""
-		"#version 300 es\n"
-		"out vec4 FragColor;\n"
-
-		"in vec3 ourColor;\n"
-		"in vec2 TexCoord;\n"
-
-		"uniform sampler2D texture1;\n"
-
-		"void main()\n"
-		"{\n"
-		"FragColor = texture(texture1, TexCoord);\n"
-		"}\n";
-
 	return m_fragmentshadersrc;
 }
+
+std::string Shader::readShaderFile(const char* path) {
+	std::string content;
+	std::ifstream file;
+	try {
+		file.open(path);
+		std::stringstream contentStream;
+		contentStream << file.rdbuf();
+		file.close();
+		content = contentStream.str();
+		return content;
+	}
+	catch (std::ifstream::failure e) {
+		std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+		return "";
+	}
+}
+
+// Uniform Setters
+void Shader::SetInt(const std::string& name, int value) const
+{
+	glUniform1i(glGetUniformLocation(m_shaderprogram, name.c_str()), value);
+}
+
+void Shader::SetFloat(const std::string& name, float value) const
+{
+	glUniform1f(glGetUniformLocation(m_shaderprogram, name.c_str()), value);
+}
+
+void Shader::SetFloat2(const std::string& name, const glm::vec2& value) const
+{
+	glUniform2f(glGetUniformLocation(m_shaderprogram, name.c_str()), value.x, value.y);
+}
+
+void Shader::SetFloat3(const std::string& name, const glm::vec3& value) const
+{
+	glUniform3f(glGetUniformLocation(m_shaderprogram, name.c_str()), value.x, value.y, value.z);
+}
+
+void Shader::SetFloat4(const std::string& name, const glm::vec4& value) const
+{
+	glUniform4f(glGetUniformLocation(m_shaderprogram, name.c_str()), value.x, value.y, value.z, value.w);
+}
+
+void Shader::SetMat4(const std::string& name, const glm::mat4& matrix) const
+{
+	glUniformMatrix4fv(glGetUniformLocation(m_shaderprogram, name.c_str()), 1, GL_FALSE, glm::value_ptr(matrix));
+}
+

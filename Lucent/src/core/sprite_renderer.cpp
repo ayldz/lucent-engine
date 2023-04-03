@@ -7,7 +7,7 @@ SpriteRenderer::SpriteRenderer()
 
 void SpriteRenderer::Prepare()
 {
-	shader.Prepare();
+	shader.Prepare("./res/Shaders/VertexShader.vert", "./res/Shaders/FragmentShader.frag");
 
 	Sprite sprite{};
 
@@ -46,7 +46,7 @@ void SpriteRenderer::Prepare()
 	Texture texture{ "res/container.jpg" };
 
 	shader.Bind();
-	glUniform1i(glGetUniformLocation(shader.GetID(), "texture1"), 0);
+	shader.SetInt("texture1", 0);
 
 	texture.Bind();
 
@@ -66,8 +66,9 @@ void SpriteRenderer::Render()
 	model = glm::rotate(model, -(float)glfwGetTime(), glm::vec3(0.0, 0.0f, 1.0));
 	model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
 
-	glUniformMatrix4fv(glGetUniformLocation(shader.GetID(), "model"), 1, GL_FALSE, glm::value_ptr(model));
-	glUniformMatrix4fv(glGetUniformLocation(shader.GetID(), "projection"), 1, GL_FALSE, glm::value_ptr(camera.GetPojectionMatrix()));
+	
+	shader.SetMat4("model", model);
+	shader.SetMat4("projection", camera.GetPojectionMatrix());
 
 	glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -81,8 +82,8 @@ void SpriteRenderer::Render()
 	model2 = glm::rotate(model2, (float)glfwGetTime(), glm::vec3(0.0, 0.0f, 1.0));
 	model2 = glm::translate(model2, glm::vec3(1.0f, 0.0f, 0.0f));
 
-	glUniformMatrix4fv(glGetUniformLocation(shader.GetID(), "model"), 1, GL_FALSE, glm::value_ptr(model2));
-	glUniformMatrix4fv(glGetUniformLocation(shader.GetID(), "projection"), 1, GL_FALSE, glm::value_ptr(camera.GetPojectionMatrix()));
+	shader.SetMat4("model", model2);
+	shader.SetMat4("projection", camera.GetPojectionMatrix());
 
 	glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
