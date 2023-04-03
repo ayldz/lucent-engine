@@ -2,14 +2,12 @@
 
 Scene::Scene() 
 {
-	m_renderer = new SpriteRenderer();
+	m_renderer = std::make_unique<SpriteRenderer>();
 	m_renderer->Prepare();
 }
 
 Scene::~Scene()
 {
-	delete m_renderer;
-	m_renderer = nullptr;
 }
 
 void Scene::Update(double dt) const

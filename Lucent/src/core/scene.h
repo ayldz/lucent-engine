@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 
 #include "../graphics/sprite.h"
 #include "sprite_renderer.h"
@@ -10,10 +11,13 @@
 class Scene 
 {
 private:
-	SpriteRenderer* m_renderer;
+	std::unique_ptr<SpriteRenderer> m_renderer;
+	std::vector<const Entity&> m_entities;
 
 public:
 	Scene();
 	~Scene();
-	void Update(double dt) const;
+
+	void Start();
+	void Update(double) const;
 };
