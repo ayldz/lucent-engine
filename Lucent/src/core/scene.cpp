@@ -15,16 +15,18 @@ void Scene::AddEntity( Entity& e)
 
 void Scene::Start()
 {
-	for (auto& e : m_entities)
+	for (size_t i = 0; i < m_entities.size(); i++)
 	{
-		e.get().Start();
+		m_entities[i].get().Start();
 	}
 }
 
 void Scene::Update(double dt) const
 {
-	for (auto& e : m_entities)
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.6f, 0.8f, 0.6f, 1.0f);
+	for (size_t i = 0; i < m_entities.size(); i++)
 	{
-		e.get().Update(dt);
+		m_entities[i].get().Update(dt);
 	}
 }

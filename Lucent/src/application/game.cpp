@@ -13,6 +13,18 @@ Game::~Game()
 
 	delete renderer;
 	renderer = nullptr;
+
+	delete transform;
+	transform = nullptr;
+
+	delete entity2;
+	entity2 = nullptr;
+
+	delete renderer2;
+	renderer2 = nullptr;
+
+	delete transform2;
+	transform2 = nullptr;
 }
 
 void Game::Init()
@@ -29,20 +41,24 @@ void Game::Init()
 	entity->AddComponent(*transform);
 	entity->AddComponent(*script);
 
-	m_scene->AddEntity(*entity);
-	
+	entity->PrintAllComponents();
+
+	transform->SetPosition(glm::vec3(480, 270,0));
 
 	//TODO: Fix it. Adding second entity is not working
-	// 
-	//entity2 = new Entity();
-	//renderer2 = new SpriteRenderer("Sprite Renderer2");
-	//transform2 = new Transform("Transform2");
-	//transform2->SetPosition(glm::vec3(750, 250, 0));
+	 
+	entity2 = new Entity();
+	renderer2 = new SpriteRenderer("Sprite Renderer2");
+	transform2 = new Transform("Transform2");
 
-	//entity2->AddComponent(*renderer2);
-	//entity2->AddComponent(*transform2);
+	entity2->AddComponent(*renderer2);
+	entity2->AddComponent(*transform2);
+	entity2->PrintAllComponents();
 
-	//m_scene->AddEntity(*entity2);
+	transform2->SetPosition(glm::vec3(150,150,0));
+
+	m_scene->AddEntity(*entity2);
+	m_scene->AddEntity(*entity);
 }
 
 void Game::Run()

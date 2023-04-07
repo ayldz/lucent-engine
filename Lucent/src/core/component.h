@@ -15,9 +15,9 @@ public:
 
 public:
 	Component(const std::string& n)
-		: name{ n }
+		: name{ n }, entity{nullptr}
 	{
-
+		
 	}
 
 	virtual void Start() = 0;

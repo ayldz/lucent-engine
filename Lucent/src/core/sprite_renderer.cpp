@@ -55,8 +55,7 @@ void SpriteRenderer::Prepare()
 
 void SpriteRenderer::Render()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0.6f, 0.8f, 0.6f, 1.0f);
+	
 
 	Camera camera{ glm::vec3(0.0f) };
 

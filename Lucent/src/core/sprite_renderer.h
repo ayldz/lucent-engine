@@ -24,7 +24,6 @@ private:
 	unsigned int m_vbo{};
 	unsigned int m_vao{};
 	unsigned int m_ebo{};
-
 	Shader shader{};
 
 public:
@@ -32,7 +31,7 @@ public:
 	SpriteRenderer(const std::string& n)
 		: Component(n)
 	{
-
+		
 	}
 	void Start() override { Prepare(); }
 	void Update(float dt) override { Render(); }
