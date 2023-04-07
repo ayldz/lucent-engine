@@ -43,10 +43,12 @@ void Window::Init()
 	glfwSetKeyCallback(m_wHandle, Input::KeyCallback);
 }
 
-void Window::Update(const Scene& scene)
+void Window::Update(Scene& scene)
 {
 	double lastTime = glfwGetTime();
 	double elapsedTime = 0.0;
+
+	scene.Start();
 
 	while (!m_isClosed)
 	{
@@ -65,16 +67,6 @@ void Window::Update(const Scene& scene)
 		}
 
 		scene.Update(deltaTime);
-
-		if (Input::GetMouseButton(0))
-		{
-			std::cout << "Mouse Button 0" << std::endl;
-		}
-
-		if (Input::GetButton(GLFW_KEY_SPACE))
-		{
-			std::cout << "Space key is pressed.." << std::endl;
-		}
 
 		if (Input::GetButton(GLFW_KEY_ESCAPE))
 		{

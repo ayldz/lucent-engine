@@ -1,8 +1,9 @@
 #include "sprite_renderer.h"
 
 
-SpriteRenderer::SpriteRenderer() 
+void SpriteRenderer::SetName(const std::string& n)
 {
+	name = n;
 }
 
 void SpriteRenderer::Prepare()
@@ -60,29 +61,10 @@ void SpriteRenderer::Render()
 	Camera camera{ glm::vec3(0.0f) };
 
 	shader.Bind();
-	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::translate(model, glm::vec3(720.0f, 270.0f, 0.0f));
-	model = glm::scale(model, glm::vec3(50.0f, 50.0f, 0.0f));
-	model = glm::rotate(model, -(float)glfwGetTime(), glm::vec3(0.0, 0.0f, 1.0));
-	model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+	Transform& t = entity->GetComponent<Transform>();
+	glm::mat4 model = t.GetTransform();
 
-	
 	shader.SetMat4("model", model);
-	shader.SetMat4("projection", camera.GetPojectionMatrix());
-
-	glBindVertexArray(m_vao);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-	glBindVertexArray(0);
-	shader.Unbind();
-
-	shader.Bind();
-	glm::mat4 model2 = glm::mat4(1.0f);
-	model2 = glm::translate(model2, glm::vec3(240.0f, 270.0f, 0.0f));
-	model2 = glm::scale(model2, glm::vec3(50.0f, 50.0f, 0.0f));
-	model2 = glm::rotate(model2, (float)glfwGetTime(), glm::vec3(0.0, 0.0f, 1.0));
-	model2 = glm::translate(model2, glm::vec3(1.0f, 0.0f, 0.0f));
-
-	shader.SetMat4("model", model2);
 	shader.SetMat4("projection", camera.GetPojectionMatrix());
 
 	glBindVertexArray(m_vao);

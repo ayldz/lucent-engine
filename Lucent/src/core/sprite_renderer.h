@@ -15,8 +15,10 @@
 #include <iostream>
 
 #include "camera.h"
+#include "component.h"
+#include "transform.h"
 
-class SpriteRenderer
+class SpriteRenderer : public Component
 {
 private: 
 	unsigned int m_vbo{};
@@ -27,11 +29,20 @@ private:
 
 public:
 
-	SpriteRenderer();
+	SpriteRenderer(const std::string& n)
+		: Component(n)
+	{
+
+	}
+	void Start() override { Prepare(); }
+	void Update(float dt) override { Render(); }
+
+	void SetName(const std::string& n);
 
 	void Prepare();
 
 	void Render();
 
-	void Clean();
+	// TODO
+	//void Clean();
 };

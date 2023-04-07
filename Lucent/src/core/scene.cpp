@@ -2,15 +2,29 @@
 
 Scene::Scene() 
 {
-	m_renderer = std::make_unique<SpriteRenderer>();
-	m_renderer->Prepare();
 }
 
 Scene::~Scene()
 {
 }
 
+void Scene::AddEntity( Entity& e)
+{
+	m_entities.push_back(e);
+}
+
+void Scene::Start()
+{
+	for (auto& e : m_entities)
+	{
+		e.get().Start();
+	}
+}
+
 void Scene::Update(double dt) const
 {
-	m_renderer->Render();
+	for (auto& e : m_entities)
+	{
+		e.get().Update(dt);
+	}
 }
