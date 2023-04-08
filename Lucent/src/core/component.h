@@ -1,16 +1,27 @@
 #pragma once
 
+#include <string>
+#include <iostream>
 
 #include "entity.h"
+
+class Entity;
 
 class Component 
 {
 public:
-	const Entity& entity;
+	std::string name;
+	Entity* entity;
 
-	Component();
+public:
+	Component(const std::string& n)
+		: name{ n }, entity{nullptr}
+	{
+		
+	}
 
-	virtual void Start();
-	virtual void Update(float);
+	virtual void Start() = 0;
+	virtual void Update(float dt) = 0;
 
+	void PrintName();
 };

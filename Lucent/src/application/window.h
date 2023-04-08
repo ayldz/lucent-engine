@@ -27,7 +27,7 @@ public:
 	Window(int, int, std::string_view);
 	virtual ~Window();
 
-	void Update(const Scene& scene);
+	void Update(Scene& scene);
 	void SetTitle(std::string_view);
 	//void SetSize(int width, int height);
 private:

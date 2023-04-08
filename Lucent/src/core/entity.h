@@ -6,29 +6,33 @@
 #include "component.h"
 
 
+class Component;
+
 class Entity 
 {
 private:
 	bool active{};
 	int id{};
-	std::string m_name;
 
-	std::vector<const Component&> m_components;
+	std::vector <std::reference_wrapper<Component>> m_components;
 
 public:
-	Entity(std::string);
-	
-	
-	template<typename T>
-	const T& GetComponent(const T&);
+	std::string name;
 
-	template<typename T>
-	void RemoveComponent(T);
+	Entity()
+	{
 
-	template<typename T>
-	void AddComponent(const T&);
+	}
 
-	std::vector<const Component&> GetAllComponents();
+	void AddComponent(Component& c);
+
+	template <typename T>
+	void RemoveComponent();
+
+	template <typename T>
+	T& GetComponent();
+
+	void PrintAllComponents();
 
 	void Start();
 	void Update(float);
@@ -36,4 +40,26 @@ public:
 	inline bool IsActive() const { return active; };
 };
 
+template<typename T>
+inline void Entity::RemoveComponent()
+{
+	for (size_t i = 0; i < m_components.size(); i++)
+	{
+		if (typeid(T) == typeid(m_components[i].get()))
+		{
+			m_components.erase(m_components.begin() + i);
+		}
+	}
+}
 
+template<typename T>
+inline T& Entity::GetComponent()
+{
+	for (size_t i = 0; i < m_components.size(); i++)
+	{
+		if (typeid(T) == typeid(m_components[i].get()))
+		{
+			return dynamic_cast<T&>(m_components[i].get());
+		}
+	}
+}
