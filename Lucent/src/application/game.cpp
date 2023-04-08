@@ -44,6 +44,7 @@ void Game::Init()
 	entity->PrintAllComponents();
 
 	transform->SetPosition(glm::vec3(480, 270,0));
+	transform->SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
 
 	//TODO: Fix it. Adding second entity is not working
 	 
@@ -56,6 +57,7 @@ void Game::Init()
 	entity2->PrintAllComponents();
 
 	transform2->SetPosition(glm::vec3(150,150,0));
+	transform2->SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
 
 	m_scene->AddEntity(*entity2);
 	m_scene->AddEntity(*entity);

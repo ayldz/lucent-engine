@@ -64,7 +64,7 @@ void SpriteRenderer::Render()
 	glm::mat4 model = t.GetTransform();
 
 	shader.SetMat4("model", model);
-	shader.SetMat4("projection", camera.GetPojectionMatrix());
+	shader.SetMat4("viewProjection", camera.GetViewProjectionMatrix());
 
 	glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

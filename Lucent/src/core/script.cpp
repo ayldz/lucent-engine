@@ -1,6 +1,6 @@
 #include "Script.h"
 
-void Script::Update(float dt)
+void Script::Update(float dt) 
 {
 	Transform& t = entity->GetComponent<Transform>();
 
