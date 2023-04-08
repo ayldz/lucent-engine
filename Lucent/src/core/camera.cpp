@@ -1,6 +1,6 @@
 #include "camera.h"
 
-Camera::Camera(glm::vec3 position) : m_position{ position }
+Camera::Camera(glm::vec3 position) : m_position{position}
 {
 	m_projection = glm::mat4(1.0f);
 	m_view = glm::mat4(1.0f);
@@ -10,15 +10,17 @@ Camera::Camera(glm::vec3 position) : m_position{ position }
 	CalculateViewMatrix();
 }
 
-void Camera::CalculateViewMatrix() {
+void Camera::CalculateViewMatrix()
+{
 	glm::mat4 transform =
-		glm::translate(glm::mat4(1.0f), m_position)	// Translation
-		* glm::toMat4(glm::quat(m_rotation));		// Rotation
+			glm::translate(glm::mat4(1.0f), m_position) // Translation
+			* glm::toMat4(glm::quat(m_rotation));				// Rotation
 
-	m_view =  glm::inverse(transform);
+	m_view = glm::inverse(transform);
 }
 
-glm::mat4 Camera::GetViewProjectionMatrix() {
+glm::mat4 Camera::GetViewProjectionMatrix()
+{
 	return m_projection * m_view;
 }
 
@@ -34,13 +36,15 @@ void Camera::SetRotation(glm::vec3 r)
 	CalculateViewMatrix();
 }
 
-void Camera::Move(glm::vec3 p) {
+void Camera::Move(glm::vec3 p)
+{
 	glm::vec4 pos = glm::vec4(p, 1);
 	m_position = m_position + glm::vec3(glm::toMat4(glm::quat(m_rotation)) * pos);
 	CalculateViewMatrix();
 }
 
-void Camera::Rotate(glm::vec3 r) {
+void Camera::Rotate(glm::vec3 r)
+{
 	m_rotation += r;
 	CalculateViewMatrix();
 }

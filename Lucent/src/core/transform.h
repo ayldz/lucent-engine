@@ -19,17 +19,18 @@ public:
 	}
 
 	inline glm::vec3 GetPosition() const { return position; }
+	inline glm::vec3 GetRotation() const { return rotation; }
+	inline glm::vec3 GetScale() const { return scale; }
 
-	void SetPosition(glm::vec3 pos)
-	{
-		position = pos;
-	}
+	void SetPosition(glm::vec3 pos) { position = pos;}
+	void SetRotation(glm::vec3 r) { rotation = r; }
+	void SetScale(glm::vec3 s) { scale = s; }
 
 	inline glm::mat4 GetTransform()
 	{
 		return glm::translate(glm::mat4(1.0f), position) // Translation
-					 * glm::toMat4(glm::quat(rotation))				 // Rotation
-					 * glm::scale(glm::mat4(1.0f), scale);		 // Scale
+					 * glm::toMat4(glm::quat(rotation))	// Rotation
+					 * glm::scale(glm::mat4(1.0f), scale); // Scale
 	}
 
 	void Start() override {}
