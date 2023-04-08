@@ -2,7 +2,7 @@
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "class_info.h";
+#include "class_info.h"
 
 class Camera
 {
