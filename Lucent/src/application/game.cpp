@@ -33,31 +33,39 @@ void Game::Init()
 	m_scene = new Scene();
 	
 	entity = new Entity();
-	renderer = new SpriteRenderer("Sprite Renderer");
+	//renderer = new SpriteRenderer("Sprite Renderer");
 	transform = new Transform("Transform");
 	script = new Script("Script");
 
-	entity->AddComponent(*renderer);
-	entity->AddComponent(*transform);
-	entity->AddComponent(*script);
+	//entity->AddComponent(*renderer);
+	//entity->AddComponent(*transform);
+	//entity->AddComponent(*script);
+	entity->AddComponent<SpriteRenderer>("SpriteRenderer");
+	entity->AddComponent<Script>("Script");
+	Transform& transform = entity->AddComponent<Transform>("Transform");
 
 	entity->PrintAllComponents();
 
-	transform->SetPosition(glm::vec3(480, 270,0));
-	transform->SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
+	transform.SetPosition(glm::vec3(480, 270,0));
+	transform.SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
 
 	//TODO: Fix it. Adding second entity is not working
 	 
 	entity2 = new Entity();
-	renderer2 = new SpriteRenderer("Sprite Renderer2");
-	transform2 = new Transform("Transform2");
+	//renderer2 = new SpriteRenderer("Sprite Renderer2");
+	//transform2 = new Transform("Transform2");
 
-	entity2->AddComponent(*renderer2);
-	entity2->AddComponent(*transform2);
+	//entity2->AddComponent(*renderer2);
+	//entity2->AddComponent(*transform2);
+	//entity2->AddComponent<Script>()
+
+	entity2->AddComponent<SpriteRenderer>("SpriteRenderer2");
+	Transform& transform2 = entity2->AddComponent<Transform>("Transform2");
+
 	entity2->PrintAllComponents();
 
-	transform2->SetPosition(glm::vec3(150,150,0));
-	transform2->SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
+	transform2.SetPosition(glm::vec3(150,150,0));
+	transform2.SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
 
 	m_scene->AddEntity(*entity2);
 	m_scene->AddEntity(*entity);

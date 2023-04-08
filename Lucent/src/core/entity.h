@@ -24,7 +24,11 @@ public:
 
 	}
 
-	void AddComponent(Component& c);
+	void AddExistingComponent(Component& c);
+
+	template<typename T>
+	T& AddComponent(std::string name = " ");
+
 
 	template <typename T>
 	void RemoveComponent();
@@ -62,4 +66,11 @@ inline T& Entity::GetComponent()
 			return dynamic_cast<T&>(m_components[i].get());
 		}
 	}
+}
+
+template<typename T>
+T& Entity::AddComponent(std::string name) {
+	T* component = new T(name);
+	this->AddExistingComponent(*component);
+	return *component;
 }

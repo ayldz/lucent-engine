@@ -1,6 +1,6 @@
 #include "entity.h"
 
-void Entity::AddComponent(Component& c)
+void Entity::AddExistingComponent(Component& c)
 {
 	c.entity = this;
 	m_components.push_back(c);
