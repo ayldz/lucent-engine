@@ -53,12 +53,8 @@ void SpriteRenderer::Prepare()
 
 }
 
-void SpriteRenderer::Render()
+void SpriteRenderer::Render(Camera& camera)
 {
-	
-
-	Camera camera{ glm::vec3(0.0f) };
-
 	shader.Bind();
 	Transform& t = entity->GetComponent<Transform>();
 	glm::mat4 model = t.GetTransform();

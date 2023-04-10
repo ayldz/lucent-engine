@@ -1,3 +1,5 @@
+#pragma once
+
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -9,8 +11,8 @@ class Camera
 	LUCENT_CLASS_INFO(Camera);
 
 protected:
-	glm::vec3 m_position;
-	glm::vec3 m_rotation = {0, 0, 0};
+	glm::vec3 m_position = { 0, 0, 0 };
+	glm::vec3 m_rotation = { 0, 0, 0 };
 
 	glm::mat4 m_projection;
 	glm::mat4 m_view;
@@ -18,7 +20,7 @@ protected:
 	void CalculateViewMatrix();
 
 public:
-	Camera(glm::vec3 position);
+	Camera();
 	~Camera() = default;
 
 	glm::mat4 GetPojectionMatrix() { return m_projection; }
