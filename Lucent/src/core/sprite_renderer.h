@@ -42,6 +42,6 @@ public:
 
 	void Render();
 
-	// TODO
+	//TODO
 	//void Clean();
 };

@@ -11,7 +11,7 @@ class Game
 private:
 	Window* m_window;
 	Scene* m_scene;
-
+	
 	Entity* entity;
 	SpriteRenderer* renderer;
 	Transform* transform;

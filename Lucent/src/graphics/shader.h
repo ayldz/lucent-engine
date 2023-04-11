@@ -26,9 +26,6 @@ public:
 	void Bind() const;
 	void Unbind() const;
 
-	inline unsigned int GetID() const { return m_shaderprogram; }
-
-
 	void SetInt(const std::string& name, int value) const;
 	void SetFloat(const std::string& name, float value) const;
 	void SetFloat2(const std::string& name, const glm::vec2& value) const;
@@ -36,6 +33,7 @@ public:
 	void SetFloat4(const std::string& name, const glm::vec4& value) const;
 	void SetMat4(const std::string& name, const glm::mat4& matrix) const;
 
+	inline unsigned int GetID() const { return m_shaderprogram; }
 private:
 	const std::string& GetVertexShaderSource();
 	const std::string& GetFragmentShaderSource();
