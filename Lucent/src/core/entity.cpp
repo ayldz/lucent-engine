@@ -1,6 +1,6 @@
 #include "entity.h"
 
-void Entity::AddComponent(Component& c)
+void Entity::AddExistingComponent(Component& c)
 {
 	c.entity = this;
 	m_components.push_back(c);
@@ -30,5 +30,12 @@ void Entity::Update(float dt)
 	for (size_t i = 0; i < m_components.size(); i++)
 	{
 		m_components[i].get().Update(dt);
+	}
+}
+
+void Entity::Render(Camera& camera) {
+	for (size_t i = 0; i < m_components.size(); i++)
+	{
+		m_components[i].get().Render(camera);
 	}
 }

@@ -9,22 +9,26 @@
 class Game 
 {
 private:
+
 	Window* m_window;
 	Scene* m_scene;
 
-	Entity* entity;
-	SpriteRenderer* renderer;
-	Transform* transform;
-	Script* script;
-
-	Entity* entity2;
-	SpriteRenderer* renderer2;
-	Transform* transform2;
 
 public:
+	static Game& Instance();
+
 	Game() = default;
 	~Game();
 
+	Game(Game const&) = delete;
+	void operator=(Game const&) = delete;
+
 	void Init();
 	void Run();
+	void Render();
+
+	// Todo: virtual void Load...
+	virtual void Start() {} ;
+	virtual void Update(double) {};
+	virtual void Quit() {};
 };

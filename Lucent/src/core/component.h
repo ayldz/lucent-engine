@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "entity.h"
-
+#include "camera.h"
 class Entity;
 
 class Component 
@@ -22,6 +22,7 @@ public:
 
 	virtual void Start() = 0;
 	virtual void Update(float dt) = 0;
+	virtual void Render(Camera& camera) {};
 
 	void PrintName();
 };
