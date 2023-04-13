@@ -18,13 +18,14 @@
 #include "component.h"
 #include "transform.h"
 
+#include "../utils/resources.h"
+
 class SpriteRenderer : public Component
 {
 private: 
 	unsigned int m_vbo{};
 	unsigned int m_vao{};
 	unsigned int m_ebo{};
-	Shader shader{};
 
 public:
 

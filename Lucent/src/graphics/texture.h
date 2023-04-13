@@ -1,13 +1,11 @@
 #pragma once
 
-#include <string>
 #include <glad/glad.h>
-#include "stb_image.h"
 
 class Texture
 {
-private:
-	unsigned int m_texture{};
+public:
+	unsigned int m_texture;
 
 	unsigned int width, height;
 
@@ -19,11 +17,10 @@ private:
 	unsigned int filterMin;
 	unsigned int filterMax;
 
-public:
-	Texture(std::string path);
+	Texture();
 	~Texture() = default;
 
 	void Generate(unsigned int width, unsigned int height, unsigned char* data);
-	void Bind();
+	void Bind() const;
 };
 

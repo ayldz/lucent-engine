@@ -10,11 +10,11 @@
 
 class Resources 
 {
-private:
+public:
 	static std::map<std::string, Texture> m_textures;
 	static std::map<std::string, Shader> m_shaders;
 
-public:
+
 	static Shader LoadShader(const char *vertexShaderPath, const char *fragmentShaderPath, const char *geometryShaderPath, std::string name);
 	static Shader GetShader(std::string name);
 
@@ -26,6 +26,6 @@ public:
 private:
 	Resources() = default;
 
-	static Shader LoadShaderFromFile(const char *vertexShaderPath, const char *fragmentShaderPath, const char *geometryShaderPath = nullptr);
+	static Shader LoadShaderFromFile(const char *vertexShaderPath, const char *fragmentShaderPath, const char *geometryShaderPath);
 	static Texture LoadTextureFromFile(const char* filePath, bool alpha);
 };

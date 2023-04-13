@@ -13,6 +13,10 @@ void Scene::AddEntity(Entity& e)
 	m_entities.push_back(e);
 }
 
+void Scene::RemoveEntity()
+{
+}
+
 void Scene::Start()
 {
 	for (size_t i = 0; i < m_entities.size(); i++)

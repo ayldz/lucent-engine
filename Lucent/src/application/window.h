@@ -28,7 +28,7 @@ public:
 	bool m_isClosed{};
 
 	Window(int, int, std::string_view);
-	virtual ~Window();
+	~Window();
 
 	void Update();
 	void SetTitle(std::string_view);

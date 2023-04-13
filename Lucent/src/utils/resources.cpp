@@ -70,33 +70,35 @@ Shader Resources::LoadShaderFromFile(const char* vertexShaderPath, const char* f
     const char* gShaderCode = geometryCode.c_str();
     // 2. now create shader object from source code
     Shader shader;
-    //shader.Compile(vShaderCode, fShaderCode, geometryShaderPath != nullptr ? gShaderCode : nullptr);
+    shader.Compile(vShaderCode, fShaderCode, geometryShaderPath != nullptr ? gShaderCode : nullptr);
     return shader;
 }
 
 Texture Resources::LoadTextureFromFile(const char* filePath, bool alpha)
 {
-    //// create texture object
-    //Texture texture;
-    //if (alpha)
-    //{
-    //    texture.Internal_Format = GL_RGBA;
-    //    texture.Image_Format = GL_RGBA;
-    //}
-    //// load image
-    //int width, height, nrChannels;
-    //unsigned char* data = stbi_load(filePath, &width, &height, &nrChannels, 0);
-    //// now generate texture
-    //texture.Generate(width, height, data);
-    //// and finally free image data
-    //stbi_image_free(data);
-    //return texture;
+    // create texture object
+    Texture texture;
+    if (alpha) //TODO alpha kontorlü yap.
+    {
+        texture.internalFormat = GL_RGBA;
+        texture.imageFormat = GL_RGBA;
+    }
+
+    // load image
+    int width, height, nrChannels;
+    unsigned char* data = stbi_load(filePath, &width, &height, &nrChannels, 0);
+
+    // now generate texture
+    texture.Generate(width, height, data);
+    // and finally free image data
+    stbi_image_free(data);
+    return texture;
 }
 
 void Resources::Clear()
 {
-	for (auto iter : m_shaders);
-	//glDeleteProgram(iter.second.ID);
-	for (auto iter : m_textures);
+    for (auto iter : m_shaders)
+        iter.second.Clear();
+	//for (auto iter : m_textures);
 	//glDeleteTextures(1, &iter.second.ID);
 }

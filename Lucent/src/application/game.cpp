@@ -28,6 +28,9 @@ void Game::Init()
 	transform.SetPosition(glm::vec3(480, 270, 0));
 	transform.SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
 	m_scene->AddEntity(*entity);
+
+	Resources::LoadTexture("./res/container.jpg", false, "container");
+	Resources::LoadShader("./res/shaders/sprite.vert", "./res/shaders/sprite.frag", nullptr, "sprite");
 }
 
 void Game::Run()
@@ -66,6 +69,8 @@ void Game::Run()
 
 		lastTime = current;
 	}
+
+	Resources::Clear();
 }
 
 void Game::Render() {

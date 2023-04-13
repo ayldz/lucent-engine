@@ -8,8 +8,6 @@ void SpriteRenderer::SetName(const std::string& n)
 
 void SpriteRenderer::Prepare()
 {
-	shader.Prepare("./res/Shaders/VertexShader.vert", "./res/Shaders/FragmentShader.frag");
-
 	Sprite sprite{};
 
 	float vertices[32];
@@ -44,26 +42,21 @@ void SpriteRenderer::Prepare()
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
-	Texture texture{ "res/container.jpg" };
-
-	shader.Bind();
-	shader.SetInt("texture1", 0);
-
-	texture.Bind();
-
+	Resources::GetTexture("container").Bind();
 }
 
 void SpriteRenderer::Render(Camera& camera)
 {
-	shader.Bind();
+	Resources::GetShader("sprite").Bind();
 	Transform& t = entity->GetComponent<Transform>();
 	glm::mat4 model = t.GetTransform();
 
-	shader.SetMat4("model", model);
-	shader.SetMat4("viewProjection", camera.GetViewProjectionMatrix());
+	Resources::GetShader("sprite").SetMat4("model", model);
+	Resources::GetShader("sprite").SetMat4("viewProjection", camera.GetViewProjectionMatrix());
 
 	glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
-	shader.Unbind();
+
+	Resources::GetShader("sprite").Unbind();
 }

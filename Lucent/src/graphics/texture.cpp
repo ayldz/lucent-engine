@@ -1,26 +1,28 @@
 #include "texture.h"
 
-Texture::Texture(std::string path)
+Texture::Texture()
+	: width(0), height(0), internalFormat(GL_RGB), imageFormat(GL_RGB), wrapS(GL_REPEAT), wrapT(GL_REPEAT), filterMin(GL_LINEAR), filterMax(GL_LINEAR)
 {
-	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
-	m_data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
-
-	glGenTextures(1, &m_texture);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, m_data);
-	glGenerateMipmap(GL_TEXTURE_2D);
+	glGenTextures(1, &this->m_texture);
 }
 
-void Texture::Bind()
+void Texture::Generate(unsigned int width, unsigned int height, unsigned char* data)
 {
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
+	this->width = width;
+	this->height = height;
+
+	glBindTexture(GL_TEXTURE_2D, this->m_texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, this->internalFormat, width, height, 0, this->imageFormat, GL_UNSIGNED_BYTE, data);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, this->wrapS);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, this->wrapT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, this->filterMin);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, this->filterMax);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Texture::Bind() const
+{
+	glBindTexture(GL_TEXTURE_2D, this->m_texture);
 }

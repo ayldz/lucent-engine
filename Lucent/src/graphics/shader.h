@@ -11,18 +11,13 @@
 class Shader
 {
 private:
-	unsigned int m_vertexshader;
-	unsigned int m_fragmentshader;
 	unsigned int m_shaderprogram;
-
-	std::string m_vertexshadersrc;
-	std::string m_fragmentshadersrc;
 
 public:
 	Shader() = default;
-	~Shader();
+	~Shader() = default;
 
-	void Prepare(const char* vertPath, const char* fragPath);
+	void Compile(const char* vertPath, const char* fragPath, const char* geoPath);
 	void Bind() const;
 	void Unbind() const;
 
@@ -34,8 +29,7 @@ public:
 	void SetMat4(const std::string& name, const glm::mat4& matrix) const;
 
 	inline unsigned int GetID() const { return m_shaderprogram; }
+	inline void Clear() { glDeleteProgram(m_shaderprogram); }
 private:
-	const std::string& GetVertexShaderSource();
-	const std::string& GetFragmentShaderSource();
-	std::string readShaderFile(const char* path);
+	void checkCompileErrors(unsigned int object, std::string type);
 };
