@@ -34,13 +34,13 @@ public:
 		
 	}
 	void Start() override { Prepare(); }
-	void Update(float dt) override { Render(); }
+	void Update(float dt) override { }
 
 	void SetName(const std::string& n);
 
 	void Prepare();
 
-	void Render();
+	void Render(Camera& camera) override;
 
 	//TODO
 	//void Clean();

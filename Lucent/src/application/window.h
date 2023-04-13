@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <string_view>
+#include <functional>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -21,13 +22,15 @@ private:
 	int m_height{};
 	std::string m_title{};
 
-	bool m_isClosed{};
+
 
 public:
+	bool m_isClosed{};
+
 	Window(int, int, std::string_view);
 	virtual ~Window();
 
-	void Update(Scene& scene);
+	void Update();
 	void SetTitle(std::string_view);
 	//void SetSize(int width, int height);
 private:

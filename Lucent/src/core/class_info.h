@@ -4,8 +4,8 @@
 class ClassInfo
 {
 public:
-    ClassInfo(std::string className) : className(className) {}
-    std::string GetName() { return className; }
+    ClassInfo(std::string c) : className(c) {}
+    const std::string&  GetName() const { return className; }
 
 private:
     std::string className;
@@ -13,8 +13,8 @@ private:
 
 #define LUCENT_CLASS_INFO(reg_class)       \
 public:                                    \
-    static const ClassInfo *GetClassInfo() \
+    static const ClassInfo* GetClassInfo() \
     {                                      \
-        static ClassInfo info(#reg_class); \
+        static const ClassInfo info(#reg_class); \
         return &info;                      \
     }

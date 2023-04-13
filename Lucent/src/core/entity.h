@@ -4,7 +4,7 @@
 #include <string>
 
 #include "component.h"
-
+#include "camera.h"
 
 class Component;
 
@@ -24,7 +24,11 @@ public:
 
 	}
 
-	void AddComponent(Component& c);
+	void AddExistingComponent(Component& c);
+
+	template<typename T>
+	T& AddComponent(std::string name = " ");
+
 
 	template <typename T>
 	void RemoveComponent();
@@ -32,10 +36,14 @@ public:
 	template <typename T>
 	T& GetComponent();
 
+	template <typename T>
+	bool HasComponent();
+
 	void PrintAllComponents();
 
 	void Start();
 	void Update(float);
+	void Render(Camera& camera);
 
 	inline bool IsActive() const { return active; };
 };
@@ -53,6 +61,19 @@ inline void Entity::RemoveComponent()
 }
 
 template<typename T>
+inline bool Entity::HasComponent()
+{
+	for (size_t i = 0; i < m_components.size(); i++)
+	{
+		if (typeid(T) == typeid(m_components[i].get()))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+template<typename T>
 inline T& Entity::GetComponent()
 {
 	for (size_t i = 0; i < m_components.size(); i++)
@@ -62,4 +83,11 @@ inline T& Entity::GetComponent()
 			return dynamic_cast<T&>(m_components[i].get());
 		}
 	}
+}
+
+template<typename T>
+T& Entity::AddComponent(std::string name) {
+	T* component = new T(name);
+	this->AddExistingComponent(*component);
+	return *component;
 }

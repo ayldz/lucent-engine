@@ -1,6 +1,7 @@
 #include "camera.h"
 
-Camera::Camera(glm::vec3 position) : m_position{position}
+
+Camera::Camera()
 {
 	m_projection = glm::mat4(1.0f);
 	m_view = glm::mat4(1.0f);

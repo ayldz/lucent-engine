@@ -3,10 +3,10 @@
 #include "application/window.h"
 #include "application/game.h"
 
+Game& game = Game::Instance();
+
 int main()
 {
-	Game game{};
-
 	game.Init();
 	game.Run();
 

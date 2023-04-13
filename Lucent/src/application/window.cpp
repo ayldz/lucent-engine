@@ -43,43 +43,16 @@ void Window::Init()
 	glfwSetKeyCallback(m_wHandle, Input::KeyCallback);
 }
 
-void Window::Update(Scene& scene)
-{
-	double lastTime = glfwGetTime();
-	double elapsedTime = 0.0;
-
-	scene.Start();
-
-	while (!m_isClosed)
+void Window::Update() {
+	if (Input::GetButton(GLFW_KEY_ESCAPE))
 	{
-		double current = glfwGetTime();
-		double deltaTime = current - lastTime;
-
-		std::string FPS = std::to_string(static_cast<int>(1.0 / deltaTime));
-		std::string title = "Lucent Engine | FPS : " + FPS;
-
-		elapsedTime += deltaTime;
-
-		if (elapsedTime >= 0.5)
-		{
-			SetTitle(title);
-			elapsedTime = 0.0;
-		}
-
-		scene.Update(deltaTime);
-
-		if (Input::GetButton(GLFW_KEY_ESCAPE))
-		{
-			glfwSetWindowShouldClose(m_wHandle, true);
-		}
-
-		glfwSwapBuffers(m_wHandle);
-		glfwPollEvents();
-
-		lastTime = current;
-
-		m_isClosed = glfwWindowShouldClose(m_wHandle);
+		glfwSetWindowShouldClose(m_wHandle, true);
 	}
+
+	glfwSwapBuffers(m_wHandle);
+	glfwPollEvents();
+
+	m_isClosed = glfwWindowShouldClose(m_wHandle);
 }
 
 void Window::SetTitle(std::string_view title)
