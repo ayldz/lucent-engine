@@ -7,40 +7,43 @@
 class MyScript : public Script {
 private:
 	float speed = 1000.0f;
+	Transform* transform = nullptr;
 
 public:
 	MyScript(const std::string& n) : Script(n) {}
 
+	void Start() {
+		transform = &(entity->GetComponent<Transform>());
+	}
+
 	void Update(float dt) override
 	{
-		Transform& t = entity->GetComponent<Transform>();
-
 		if (Input::GetButton(GLFW_KEY_LEFT))
 		{
-			glm::vec3 p = t.GetPosition();
+			glm::vec3 p = transform->GetPosition();
 			glm::vec3 newPos = glm::vec3(p.x - (1.0f * speed * dt), p.y, p.z);
-			t.SetPosition(newPos);
+			transform->SetPosition(newPos);
 		}
 
 		else if (Input::GetButton(GLFW_KEY_RIGHT))
 		{
-			glm::vec3 p = t.GetPosition();
+			glm::vec3 p = transform->GetPosition();
 			glm::vec3 newPos = glm::vec3(p.x + (1.0f * speed * dt), p.y, p.z);
-			t.SetPosition(newPos);
+			transform->SetPosition(newPos);
 		}
 
 		if (Input::GetButton(GLFW_KEY_UP))
 		{
-			glm::vec3 p = t.GetPosition();
+			glm::vec3 p = transform->GetPosition();
 			glm::vec3 newPos = glm::vec3(p.x, p.y + (1.0f * speed * dt), p.z);
-			t.SetPosition(newPos);
+			transform->SetPosition(newPos);
 		}
 
 		else if (Input::GetButton(GLFW_KEY_DOWN))
 		{
-			glm::vec3 p = t.GetPosition();
+			glm::vec3 p = transform->GetPosition();
 			glm::vec3 newPos = glm::vec3(p.x, p.y - (1.0f * speed * dt), p.z);
-			t.SetPosition(newPos);
+			transform->SetPosition(newPos);
 		}
 	}
 };
@@ -50,8 +53,8 @@ class MyScene : public Scene {
 		Resources::LoadTexture("../Lucent/res/container.jpg", false, "container");
 		Resources::LoadShader("../Lucent/res/shaders/sprite.vert", "../Lucent/res/shaders/sprite.frag", nullptr, "sprite");
 
-		for (int j = 1; j < 41; j++) {
-			for (int i = 1; i < 41; i++) {
+		for (int j = 0; j < 60; j++) {
+			for (int i = 0; i < 60; i++) {
 				Entity* entity = new Entity();
 				entity->AddComponent<SpriteRenderer>("SpriteRenderer");
 				entity->AddComponent<MyScript>("Script");
