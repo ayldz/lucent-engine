@@ -1,7 +1,8 @@
 #include <iostream>
+#include <Lucent.h>
 
-#include "application/window.h"
-#include "application/game.h"
+
+
 
 class MyScript : public Script {
 private:
@@ -17,21 +18,21 @@ public:
 		if (Input::GetButton(GLFW_KEY_LEFT))
 		{
 			glm::vec3 p = t.GetPosition();
-			glm::vec3 newPos = glm::vec3(p.x - (1.0f * speed * dt), p.y, p.z) ;
+			glm::vec3 newPos = glm::vec3(p.x - (1.0f * speed * dt), p.y, p.z);
 			t.SetPosition(newPos);
 		}
 
 		else if (Input::GetButton(GLFW_KEY_RIGHT))
 		{
 			glm::vec3 p = t.GetPosition();
-			glm::vec3 newPos = glm::vec3(p.x + (1.0f * speed * dt), p.y, p.z) ;
+			glm::vec3 newPos = glm::vec3(p.x + (1.0f * speed * dt), p.y, p.z);
 			t.SetPosition(newPos);
 		}
 
 		if (Input::GetButton(GLFW_KEY_UP))
 		{
 			glm::vec3 p = t.GetPosition();
-			glm::vec3 newPos = glm::vec3(p.x, p.y + (1.0f * speed * dt), p.z) ;
+			glm::vec3 newPos = glm::vec3(p.x, p.y + (1.0f * speed * dt), p.z);
 			t.SetPosition(newPos);
 		}
 
@@ -46,19 +47,24 @@ public:
 
 class MyScene : public Scene {
 	void Start() override {
-		Resources::LoadTexture("./res/container.jpg", false, "container");
-		Resources::LoadShader("./res/shaders/sprite.vert", "./res/shaders/sprite.frag", nullptr, "sprite");
+		Resources::LoadTexture("../Lucent/res/container.jpg", false, "container");
+		Resources::LoadShader("../Lucent/res/shaders/sprite.vert", "../Lucent/res/shaders/sprite.frag", nullptr, "sprite");
 
-		Entity* entity = new Entity();
-		entity->AddComponent<SpriteRenderer>("SpriteRenderer");
-		entity->AddComponent<MyScript>("Script");
+		for (int j = 1; j < 41; j++) {
+			for (int i = 1; i < 41; i++) {
+				Entity* entity = new Entity();
+				entity->AddComponent<SpriteRenderer>("SpriteRenderer");
+				entity->AddComponent<MyScript>("Script");
 
 
-		Transform& transform = entity->AddComponent<Transform>("Transform");
-		transform.SetPosition(glm::vec3(480, 270, 0));
-		transform.SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
+				Transform& transform = entity->AddComponent<Transform>("Transform");
+				transform.SetPosition(glm::vec3(70 * j, 55 * i, 0));
+				transform.SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
 
-		this->AddEntity(*entity);
+				this->AddEntity(*entity);
+			}
+		}
+		
 	}
 
 	void Update(double dt) override {

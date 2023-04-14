@@ -1,16 +1,15 @@
-project "Lucent"
-	kind "StaticLib"
+project "Sanbox"
+	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++20"
-
 
 	files 
 	{ 
 		"src/**.h",
 		"src/**.cpp",
-		"libs/glm/**.hpp",
-		"libs/glm/**.inl",
-		"libs/stb/stb_image.h"
+		-- "libs/glm/**.hpp",
+		-- "libs/glm/**.inl",
+		-- "libs/stb/stb_image.h"
 	}
 	
 	defines
@@ -20,18 +19,16 @@ project "Lucent"
 	
 	includedirs
 	{
-		"src",
-		"libs/GLFW/include",
-		"libs/Glad/include",
-		"libs/glm",
-		"libs/stb"
+    "%{wks.location}/Lucent/src",
+    "%{wks.location}/Lucent/libs/GLFW/include",
+		"%{wks.location}/Lucent/libs/Glad/include",
+		"%{wks.location}/Lucent/libs/glm",
+		"%{wks.location}/Lucent/libs/stb"
 	}
 	
 	links
 	{
-		"GLFW",
-		"Glad",
-		"opengl32.lib"
+		"Lucent",
 	}
 	
 	filter "configurations:Debug"

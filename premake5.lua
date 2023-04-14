@@ -1,6 +1,6 @@
 workspace "Lucent"
 	architecture "x64"
-	startproject "Lucent"
+	startproject "Sandbox"
 	configurations {"Debug", "Release"}
 	
 	group "Libs"
@@ -9,3 +9,4 @@ workspace "Lucent"
 	group ""
 	
 	include "Lucent"
+	include "Sandbox"
