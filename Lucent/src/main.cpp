@@ -3,11 +3,77 @@
 #include "application/window.h"
 #include "application/game.h"
 
-Game& game = Game::Instance();
+class MyScript : public Script {
+private:
+	float speed = 1000.0f;
 
+public:
+	MyScript(const std::string& n) : Script(n) {}
+
+	void Update(float dt) override
+	{
+		Transform& t = entity->GetComponent<Transform>();
+
+		if (Input::GetButton(GLFW_KEY_LEFT))
+		{
+			glm::vec3 p = t.GetPosition();
+			glm::vec3 newPos = glm::vec3(p.x - (1.0f * speed * dt), p.y, p.z) ;
+			t.SetPosition(newPos);
+		}
+
+		else if (Input::GetButton(GLFW_KEY_RIGHT))
+		{
+			glm::vec3 p = t.GetPosition();
+			glm::vec3 newPos = glm::vec3(p.x + (1.0f * speed * dt), p.y, p.z) ;
+			t.SetPosition(newPos);
+		}
+
+		if (Input::GetButton(GLFW_KEY_UP))
+		{
+			glm::vec3 p = t.GetPosition();
+			glm::vec3 newPos = glm::vec3(p.x, p.y + (1.0f * speed * dt), p.z) ;
+			t.SetPosition(newPos);
+		}
+
+		else if (Input::GetButton(GLFW_KEY_DOWN))
+		{
+			glm::vec3 p = t.GetPosition();
+			glm::vec3 newPos = glm::vec3(p.x, p.y - (1.0f * speed * dt), p.z);
+			t.SetPosition(newPos);
+		}
+	}
+};
+
+class MyScene : public Scene {
+	void Start() override {
+		Resources::LoadTexture("./res/container.jpg", false, "container");
+		Resources::LoadShader("./res/shaders/sprite.vert", "./res/shaders/sprite.frag", nullptr, "sprite");
+
+		Entity* entity = new Entity();
+		entity->AddComponent<SpriteRenderer>("SpriteRenderer");
+		entity->AddComponent<MyScript>("Script");
+
+
+		Transform& transform = entity->AddComponent<Transform>("Transform");
+		transform.SetPosition(glm::vec3(480, 270, 0));
+		transform.SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
+
+		this->AddEntity(*entity);
+	}
+
+	void Update(double dt) override {
+
+	}
+};
+
+Game& game = Game::Instance();
 int main()
 {
 	game.Init();
+	MyScene* my_scene = new MyScene();
+
+	game.SetScene(my_scene);
+
 	game.Run();
 
 	return 0;

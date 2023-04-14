@@ -14,7 +14,7 @@
 class Script : public Component
 {
 private:
-	float speed = 1000.0f;
+
 public:
 	Script(const std::string& n)
 		: Component(n)
@@ -22,8 +22,8 @@ public:
 	}
 
 
-	void Start() override {}
-	void Update(float dt) override;
+	virtual void Start() override {}
+	virtual void Update(float dt) override;
 
 	void SetName(const std::string& n);
 };

@@ -10,8 +10,8 @@ class Game
 {
 private:
 
-	Window* m_window;
-	Scene* m_scene;
+	Window* m_window = nullptr;
+	Scene* m_scene = nullptr;
 
 	Entity* entity;
 	SpriteRenderer* renderer;
@@ -29,10 +29,10 @@ public:
 
 	void Init();
 	void Run();
+	void Start();
+	void Update(double);
 	void Render();
+	void Quit();
 
-	// Todo: virtual void Load...
-	virtual void Start() {} ;
-	virtual void Update(double) {};
-	virtual void Quit() {};
+	void SetScene(Scene* s) { m_scene = s; }
 };
