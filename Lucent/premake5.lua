@@ -23,6 +23,7 @@ project "Lucent"
 		"src",
 		"libs/GLFW/include",
 		"libs/Glad/include",
+		"libs/Box2D/include",
 		"libs/glm",
 		"libs/stb"
 	}
@@ -31,6 +32,7 @@ project "Lucent"
 	{
 		"GLFW",
 		"Glad",
+		"Box2D",
 		"opengl32.lib"
 	}
 	
