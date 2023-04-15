@@ -19,13 +19,12 @@
 #include "transform.h"
 
 #include "../utils/resources.h"
+#include "../graphics/vertex_array.h"
 
 class SpriteRenderer : public Component
 {
 private: 
-	unsigned int m_vbo{};
-	unsigned int m_vao{};
-	unsigned int m_ebo{};
+	static VertexArray* m_vao;
 
 public:
 
