@@ -17,20 +17,6 @@ Game::~Game()
 void Game::Init()
 {
 	m_window = new Window(960, 540, "Lucent Engine | FPS : 0.0");
-	m_scene = new Scene();
-	
-	Entity* entity = new Entity();
-	entity->AddComponent<SpriteRenderer>("SpriteRenderer");
-	entity->AddComponent<Script>("Script");
-
-	
-	Transform& transform = entity->AddComponent<Transform>("Transform");
-	transform.SetPosition(glm::vec3(480, 270, 0));
-	transform.SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
-	m_scene->AddEntity(*entity);
-
-	Resources::LoadTexture("./res/container.jpg", false, "container");
-	Resources::LoadShader("./res/shaders/sprite.vert", "./res/shaders/sprite.frag", nullptr, "sprite");
 }
 
 void Game::Run()
@@ -40,7 +26,6 @@ void Game::Run()
 
 	// Start 
 	this->Start();
-	m_scene->Start();
 
 	while (!m_window->m_isClosed)
 	{
@@ -61,9 +46,7 @@ void Game::Run()
 
 		// Update
 		this->Update(deltaTime);
-		m_scene->Update(deltaTime);
-		m_window->Update();
-
+		
 		// Render
 		this->Render();
 
@@ -73,7 +56,22 @@ void Game::Run()
 	Resources::Clear();
 }
 
-void Game::Render() {
-	m_scene->Render();
+void Game::Start() {
+	if (m_scene != nullptr)
+		m_scene->S_Start();
 }
 
+void Game::Update(double deltaTime) {
+	if (m_scene !=  nullptr)
+		m_scene->S_Update(deltaTime);
+	m_window->Update();
+}
+
+void Game::Render() {
+	if (m_scene != nullptr)
+		m_scene->S_Render();
+}
+
+void Game::Quit() {
+
+}

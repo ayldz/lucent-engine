@@ -24,7 +24,10 @@ public:
 	void RemoveEntity();
 
 	// Todo: void Load...
-	void Start();
-	void Update(double) const;
-	void Render();
+	void S_Start();
+	void S_Update(double);
+	void S_Render();
+
+	virtual void Start() {};
+	virtual void Update(double) {};
 };

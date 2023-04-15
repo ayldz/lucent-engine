@@ -1,13 +1,12 @@
 #include "input.h"
 
-
-Input& Input::Instance()
+Input &Input::Instance()
 {
-	static Input* instance = new Input;
+	static Input *instance = new Input;
 	return *instance;
 }
 
-void Input::CursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
+void Input::CursorPositionCallback(GLFWwindow *window, double xpos, double ypos)
 {
 	Instance().m_lastX = Instance().m_posX;
 	Instance().m_lastY = Instance().m_posY;
@@ -25,7 +24,7 @@ bool Input::GetButton(KeyCode key)
 	return Instance().m_keyPressed[(int)key];
 }
 
-void Input::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+void Input::MouseButtonCallback(GLFWwindow *window, int button, int action, int mods)
 {
 	if (action == GLFW_PRESS)
 	{
@@ -37,13 +36,14 @@ void Input::MouseButtonCallback(GLFWwindow* window, int button, int action, int 
 	}
 }
 
-void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Input::KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
 	if (action == GLFW_PRESS)
 	{
 		Instance().m_keyPressed[key] = true;
 	}
-	else
+	// TODO: there is also GL_REPEAT action
+	else if (action == GLFW_RELEASE)
 	{
 		Instance().m_keyPressed[key] = false;
 	}

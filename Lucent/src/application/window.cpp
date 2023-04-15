@@ -41,6 +41,12 @@ void Window::Init()
 	glfwSetCursorPosCallback(m_wHandle, Input::CursorPositionCallback);
 	glfwSetMouseButtonCallback(m_wHandle, Input::MouseButtonCallback);
 	glfwSetKeyCallback(m_wHandle, Input::KeyCallback);
+	
+	glfwSetWindowUserPointer(m_wHandle, this);
+	glfwSetFramebufferSizeCallback(m_wHandle, [](GLFWwindow* glfw_Window, int width, int height) {
+		Window* window = (Window*)glfwGetWindowUserPointer(glfw_Window);
+		window->UpdateWindowSize(width, height);
+	});
 }
 
 void Window::Update() {
@@ -59,5 +65,12 @@ void Window::SetTitle(std::string_view title)
 {
 	m_title = title;
 	glfwSetWindowTitle(m_wHandle, m_title.c_str());
+}
+
+void Window::UpdateWindowSize(int width, int height)
+{
+	this->m_width = width;
+	this->m_height = height;
+	glViewport(0, 0, width, height);
 }
 
