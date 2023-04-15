@@ -9,8 +9,6 @@
 #include "transform.h"
 #include "../application/input.h"
 
-
-
 class Script : public Component
 {
 private:

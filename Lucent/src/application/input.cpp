@@ -20,9 +20,9 @@ bool Input::GetMouseButton(int button)
 	return Instance().m_mouseButtonPressed[button];
 }
 
-bool Input::GetButton(int key)
+bool Input::GetButton(KeyCode key)
 {
-	return Instance().m_keyPressed[key];
+	return Instance().m_keyPressed[(int)key];
 }
 
 void Input::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)

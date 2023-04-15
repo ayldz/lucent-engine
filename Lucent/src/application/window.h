@@ -22,8 +22,6 @@ private:
 	int m_height{};
 	std::string m_title{};
 
-
-
 public:
 	bool m_isClosed{};
 
