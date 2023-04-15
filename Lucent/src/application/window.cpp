@@ -50,7 +50,7 @@ void Window::Init()
 }
 
 void Window::Update() {
-	if (Input::GetButton(GLFW_KEY_ESCAPE))
+	if (Input::GetButton(KeyCode::Escape))
 	{
 		glfwSetWindowShouldClose(m_wHandle, true);
 	}

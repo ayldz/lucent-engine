@@ -13,6 +13,7 @@
 
 #include "input.h"
 
+
 class Window
 {
 private:
@@ -22,8 +23,6 @@ private:
 	int m_height{};
 	std::string m_title{};
 
-
-
 public:
 	bool m_isClosed{};
 
@@ -32,7 +31,6 @@ public:
 
 	void Update();
 	void SetTitle(std::string_view);
-	//void SetSize(int width, int height);
 
 	void UpdateWindowSize(int width, int height);
 private:

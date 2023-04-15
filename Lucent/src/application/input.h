@@ -3,6 +3,8 @@
 #include <GLFW/glfw3.h>
 #include <array>
 
+#include "keys.h"
+
 class Input
 {
 private:
@@ -18,7 +20,7 @@ public:
 
 	static double GetMousePosX();
 	static double GetMousePosY();
-	static bool GetButton(int key);
+	static bool GetButton(KeyCode key);
 	static bool GetMouseButton(int button);
 
 	static void CursorPositionCallback(GLFWwindow* window, double xpos, double ypos);
