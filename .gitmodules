@@ -7,3 +7,6 @@
 [submodule "Lucent/libs/stb"]
 	path = Lucent/libs/stb
 	url = https://github.com/nothings/stb.git
+[submodule "Lucent/libs/Box2D"]
+	path = Lucent/libs/Box2D
+	url = https://github.com/ayldz/box2d.git

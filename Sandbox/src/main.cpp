@@ -1,9 +1,6 @@
 #include <iostream>
 #include <Lucent.h>
 
-
-
-
 class MyScript : public Script {
 private:
 	float speed = 1000.0f;
