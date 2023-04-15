@@ -33,6 +33,8 @@ public:
 	void Update();
 	void SetTitle(std::string_view);
 	//void SetSize(int width, int height);
+
+	void UpdateWindowSize(int width, int height);
 private:
 	void Init();
 };

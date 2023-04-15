@@ -17,24 +17,29 @@ void Scene::RemoveEntity()
 {
 }
 
-void Scene::Start()
+void Scene::S_Start()
 {
+	this->Start();
+
 	for (size_t i = 0; i < m_entities.size(); i++)
 	{
 		m_entities[i].get().Start();
 	}
+
 }
 
-void Scene::Update(double dt) const
+void Scene::S_Update(double dt)
 {
+	this->Update(dt);
+
 	for (size_t i = 0; i < m_entities.size(); i++)
 	{
 		m_entities[i].get().Update(dt);
 	}
+
 }
 
-
-void Scene::Render()
+void Scene::S_Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(0.6f, 0.8f, 0.6f, 1.0f);
