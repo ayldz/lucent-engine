@@ -7,12 +7,15 @@ out vec3 ourColor;
 out vec2 TexCoord;
 
 uniform mat4 model;
-uniform mat4 viewProjection;
+
+layout(std140) uniform Camera
+{
+	mat4 viewProjection;
+};
 
 void main()
 {
 	gl_Position = viewProjection  * model * vec4(aPos, 1.0);
 	ourColor=aColor;
 	TexCoord=aTexCoord;
-
 };

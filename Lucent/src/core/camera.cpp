@@ -6,16 +6,23 @@ Camera::Camera()
 	m_projection = glm::mat4(1.0f);
 	m_view = glm::mat4(1.0f);
 
-	m_projection = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, 0.0f, 100.0f);
+	float aspectRatio = 960.0f / 540.0f;
+	m_projection = glm::ortho(-aspectRatio * 5, aspectRatio * 5, -5.0f, 5.0f, -1.0f, 1.0f);
+	//m_projection = glm::perspective(glm::radians(45.0f), 960.0f / 540.0f, 0.1f, 100.0f);
 
 	CalculateViewMatrix();
+}
+
+void Camera::SetProjection(float width, float height) {
+	float aspectRatio = width / height;
+	m_projection = glm::ortho(-aspectRatio * 5, aspectRatio * 5, -5.0f, 5.0f, -1.0f, 1.0f);
 }
 
 void Camera::CalculateViewMatrix()
 {
 	glm::mat4 transform =
 			glm::translate(glm::mat4(1.0f), m_position) // Translation
-			* glm::toMat4(glm::quat(m_rotation));				// Rotation
+			* glm::toMat4(glm::quat(m_rotation));		// Rotation
 
 	m_view = glm::inverse(transform);
 }

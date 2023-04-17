@@ -70,3 +70,11 @@ void VertexArray::Bind() const {
 void VertexArray::Unbind() const {
 	glBindVertexArray(0);
 }
+
+unsigned int VertexArray::GetIndexCount() const {
+	return mesh->indices.size();
+}
+
+unsigned int VertexArray::GetVertexCount() const {
+	return mesh->vertices.size();
+}

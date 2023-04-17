@@ -27,6 +27,7 @@ public:
 	void SetFloat3(const std::string& name, const glm::vec3& value) const;
 	void SetFloat4(const std::string& name, const glm::vec4& value) const;
 	void SetMat4(const std::string& name, const glm::mat4& matrix) const;
+	void SetUniformBindingPoint(const std::string& name, const unsigned int bindingPoint) const;
 
 	inline unsigned int GetID() const { return m_shaderprogram; }
 	inline void Clear() { glDeleteProgram(m_shaderprogram); }

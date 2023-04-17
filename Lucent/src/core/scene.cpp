@@ -26,6 +26,7 @@ void Scene::S_Start()
 		m_entities[i].get().Start();
 	}
 
+	Renderer::Prepare();
 }
 
 void Scene::S_Update(double dt)
@@ -36,23 +37,23 @@ void Scene::S_Update(double dt)
 	{
 		m_entities[i].get().Update(dt);
 	}
-
 }
+
 
 void Scene::S_Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(0.6f, 0.8f, 0.6f, 1.0f);
+
+	Renderer::SetViewProjectionMatrix(camera.GetViewProjectionMatrix());
+
 	for (size_t i = 0; i < m_entities.size(); i++)
 	{
-		
-		/* Maybe later...
 		if (m_entities[i].get().HasComponent<SpriteRenderer>()) {
 			SpriteRenderer& renderer = m_entities[i].get().GetComponent<SpriteRenderer>();
 			renderer.Render(camera);
 		}
-		*/
-
-		m_entities[i].get().Render(camera);
+		
+		//m_entities[i].get().Render(camera);		
 	}
 }

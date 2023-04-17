@@ -35,4 +35,7 @@ public:
 
 	void Bind() const;
 	void Unbind() const;
+
+	unsigned int GetIndexCount() const;
+	unsigned int GetVertexCount() const;
 };

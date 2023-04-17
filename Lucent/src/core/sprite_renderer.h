@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../graphics/sprite.h"
 #include "../graphics/shader.h"
 #include "../graphics/texture.h"
 
@@ -23,16 +22,14 @@
 
 class SpriteRenderer : public Component
 {
-private: 
+public:
 	static VertexArray* m_vao;
 
-public:
+	Texture texture;
+	Shader shader;
 
-	SpriteRenderer(const std::string& n)
-		: Component(n)
-	{
-		
-	}
+	SpriteRenderer(const std::string& n) : Component(n) {}
+
 	void Start() override { Prepare(); }
 	void Update(float dt) override { }
 
@@ -41,6 +38,9 @@ public:
 	void Prepare();
 
 	void Render(Camera& camera) override;
+
+	void SetTexture(Texture t) { texture = t; }
+	void SetShader(Shader s) { shader = s; }
 
 	//TODO
 	//void Clean();

@@ -3,11 +3,11 @@
 #include <vector>
 #include <memory>
 
-#include "../graphics/sprite.h"
 #include "camera.h"
 #include "sprite_renderer.h"
 
 #include "entity.h"
+#include "graphics/renderer.h"
 
 class Scene 
 {
