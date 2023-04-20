@@ -7,9 +7,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include "../graphics/sprite.h"
-#include "../core/sprite_renderer.h"
-#include "../core/scene.h"
 
 #include "input.h"
 

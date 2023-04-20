@@ -29,6 +29,7 @@ public:
 	glm::vec3 GetRotation() { return m_rotation; };
 	glm::mat4 GetViewProjectionMatrix();
 
+	void SetProjection(float width, float height);
 	void SetPosition(glm::vec3 p);
 	void SetRotation(glm::vec3 r);
 	void Move(glm::vec3 p);

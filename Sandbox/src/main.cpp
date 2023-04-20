@@ -1,15 +1,17 @@
 #include <iostream>
 #include <Lucent.h>
 
-class MyScript : public Script {
+class MyScript : public Script
+{
 private:
-	float speed = 1000.0f;
-	Transform* transform = nullptr;
+	float speed = 10.0f;
+	Transform *transform = nullptr;
 
 public:
-	MyScript(const std::string& n) : Script(n) {}
+	MyScript(const std::string &n) : Script(n) {}
 
-	void Start() {
+	void Start()
+	{
 		transform = &(entity->GetComponent<Transform>());
 	}
 
@@ -45,39 +47,70 @@ public:
 	}
 };
 
-class MyScene : public Scene {
-	void Start() override {
-		Resources::LoadTexture("./res/container.jpg", false, "container");
-		Resources::LoadShader("./res/shaders/sprite.vert", "./res/shaders/sprite.frag", nullptr, "sprite");
+class MyScene : public Scene
+{
+	void Start() override
+	{
+		Texture containerTex = Resources::LoadTexture("./res/container.jpg", false, "container");
+		Shader defaultShader = Resources::LoadShader("./res/shaders/sprite.vert", "./res/shaders/sprite.frag", nullptr, "sprite");
 
-		for (int j = 0; j < 60; j++) {
-			for (int i = 0; i < 60; i++) {
-				Entity* entity = new Entity();
-				entity->AddComponent<SpriteRenderer>("SpriteRenderer");
+		for (int j = 0; j < 12; j++)
+		{
+			for (int i = 0; i < 12; i++)
+			{
+				Entity *entity = new Entity();
+				SpriteRenderer &sp = entity->AddComponent<SpriteRenderer>("SpriteRenderer");
+				sp.SetTexture(containerTex);
+				sp.SetShader(defaultShader);
+
 				entity->AddComponent<MyScript>("Script");
 
-
-				Transform& transform = entity->AddComponent<Transform>("Transform");
-				transform.SetPosition(glm::vec3(70 * j, 55 * i, 0));
-				transform.SetScale(glm::vec3(50.0f, 50.0f, 0.0f));
+				Transform &transform = entity->AddComponent<Transform>("Transform");
+				transform.SetPosition(glm::vec3(1.2 * j, 1.2 * i, 0));
 
 				this->AddEntity(*entity);
 			}
 		}
-		
 	}
 
-	void Update(double dt) override {
+	void Update(double dt) override
+	{
+		const float cameraSpeed = 0.5f; 
+		if (Input::GetButton(KeyCode::W))
+		{
+			camera.Move(cameraSpeed * glm::vec3(0, 1, 0));
+		}
+		if (Input::GetButton(KeyCode::S))
+		{
+			camera.Move(cameraSpeed * glm::vec3(0, -1, 0));
+		}
+		if (Input::GetButton(KeyCode::A))
+		{
+			camera.Move(cameraSpeed * glm::vec3(-1, 0, 0));
+		}
+		if (Input::GetButton(KeyCode::D))
+		{
+			camera.Move(cameraSpeed * glm::vec3(1, 0, 0));
+		}
 
+		if (Input::GetButton(KeyCode::E))
+		{
+			camera.Rotate(glm::vec3(0, 0, glm::radians(-0.5)));
+		}
+
+		if (Input::GetButton(KeyCode::Q))
+		{
+			camera.Rotate(glm::vec3(0, 0, glm::radians(0.5)));
+		}
 	}
 };
 
-Game& game = Game::Instance();
+Game &game = Game::Instance();
 int main()
 {
 	game.Init();
-	MyScene* my_scene = new MyScene();
-
+	MyScene *my_scene = new MyScene();
+	
 	game.SetScene(my_scene);
 
 	game.Run();

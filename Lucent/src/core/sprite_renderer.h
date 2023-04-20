@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../graphics/sprite.h"
 #include "../graphics/shader.h"
 #include "../graphics/texture.h"
 
@@ -19,21 +18,18 @@
 #include "transform.h"
 
 #include "../utils/resources.h"
+#include "../graphics/vertex_array.h"
 
 class SpriteRenderer : public Component
 {
-private: 
-	unsigned int m_vbo{};
-	unsigned int m_vao{};
-	unsigned int m_ebo{};
-
 public:
+	static VertexArray* m_vao;
 
-	SpriteRenderer(const std::string& n)
-		: Component(n)
-	{
-		
-	}
+	Texture texture;
+	Shader shader;
+
+	SpriteRenderer(const std::string& n) : Component(n) {}
+
 	void Start() override { Prepare(); }
 	void Update(float dt) override { }
 
@@ -42,6 +38,9 @@ public:
 	void Prepare();
 
 	void Render(Camera& camera) override;
+
+	void SetTexture(Texture t) { texture = t; }
+	void SetShader(Shader s) { shader = s; }
 
 	//TODO
 	//void Clean();

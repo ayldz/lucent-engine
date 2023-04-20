@@ -21,6 +21,8 @@ void Shader::Compile(const char* vertPath, const char* fragPath, const char* geo
     glLinkProgram(this->m_shaderprogram);
     checkCompileErrors(this->m_shaderprogram, "PROGRAM");
     
+    this->SetUniformBindingPoint("Camera", 0);
+
     glDeleteShader(sVertex);
     glDeleteShader(sFragment);
 }
@@ -65,6 +67,10 @@ void Shader::SetFloat4(const std::string& name, const glm::vec4& value) const
 void Shader::SetMat4(const std::string& name, const glm::mat4& matrix) const
 {
 	glUniformMatrix4fv(glGetUniformLocation(m_shaderprogram, name.c_str()), 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
+void Shader::SetUniformBindingPoint(const std::string& name, const unsigned int bindingPoint) const {
+    glUniformBlockBinding(m_shaderprogram, glGetUniformBlockIndex(m_shaderprogram, name.c_str()), bindingPoint);
 }
 
 void Shader::checkCompileErrors(unsigned int object, std::string type)
