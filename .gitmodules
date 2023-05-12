@@ -1,0 +1,12 @@
+[submodule "Lucent/libs/GLFW"]
+	path = Lucent/libs/GLFW
+	url = https://github.com/ayldz/glfw.git
+[submodule "Lucent/libs/glm"]
+	path = Lucent/libs/glm
+	url = https://github.com/ayldz/glm.git
+[submodule "Lucent/libs/stb"]
+	path = Lucent/libs/stb
+	url = https://github.com/nothings/stb.git
+[submodule "Lucent/libs/Box2D"]
+	path = Lucent/libs/Box2D
+	url = https://github.com/ayldz/box2d.git
