@@ -1,0 +1,14 @@
+{
+  "dependencies": [
+    "glfw3",
+    {
+      "name": "glad",
+      "features": [ "gles2-api-latest" ]
+    },
+    "box2d",
+    "glm",
+    "stb"
+  ],
+  "name": "lucent-engine",
+  "version-string": "0.1"
+}
