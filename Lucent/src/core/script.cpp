@@ -1,11 +1,14 @@
 #include "Script.h"
 
-void Script::Update(float dt) 
-{
-	
-}
+namespace Lucent {
 
-void Script::SetName(const std::string& n)
-{
-	name = n;
+	void Script::Update(float dt)
+	{
+
+	}
+
+	void Script::SetName(const std::string& n)
+	{
+		name = n;
+	}
 }

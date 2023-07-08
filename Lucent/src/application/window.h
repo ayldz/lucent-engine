@@ -10,29 +10,29 @@
 
 #include "input.h"
 
+namespace Lucent {
 
-class Window
-{
-private:
-	GLFWwindow* m_wHandle{};
+	class Window
+	{
+	private:
+		GLFWwindow* m_wHandle{};
 
-	int m_width{};
-	int m_height{};
-	std::string m_title{};
+		int m_width{};
+		int m_height{};
+		std::string m_title{};
 
-public:
-	bool m_isClosed{};
+	public:
+		bool m_isClosed{};
 
-	Window(int, int, std::string_view);
-	~Window();
+		Window(int, int, std::string_view);
+		~Window();
 
-	void Update();
-	void SetTitle(std::string_view);
+		void Update();
+		void SetTitle(std::string_view);
 
-	void UpdateWindowSize(int width, int height);
-private:
-	void Init();
-};
+		void UpdateWindowSize(int width, int height);
+	private:
+		void Init();
+	};
 
-
-
+}

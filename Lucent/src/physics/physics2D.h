@@ -5,17 +5,19 @@
 
 #include "contact_listener.h"
 
-class PhysicsWorld2D
-{
-private:
-	b2Vec2 m_gravity = b2Vec2(0.0f, -9.8f);
-	b2World *m_world = new b2World(m_gravity);
-
-	float m_physicsTime;
-	float physicsTimeStep;
-
-	PhysicsWorld2D()
+namespace Lucent {
+	class PhysicsWorld2D
 	{
-		m_world->SetContactListener(new LucentContactListener());
-	}
-};
+	private:
+		b2Vec2 m_gravity = b2Vec2(0.0f, -9.8f);
+		b2World* m_world = new b2World(m_gravity);
+
+		float m_physicsTime;
+		float physicsTimeStep;
+
+		PhysicsWorld2D()
+		{
+			m_world->SetContactListener(new LucentContactListener());
+		}
+	};
+}

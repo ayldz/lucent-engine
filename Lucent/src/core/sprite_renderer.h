@@ -20,28 +20,31 @@
 #include "../utils/resources.h"
 #include "../graphics/vertex_array.h"
 
-class SpriteRenderer : public Component
-{
-public:
-	static VertexArray* m_vao;
+namespace Lucent {
 
-	Texture texture;
-	Shader shader;
+	class SpriteRenderer : public Component
+	{
+	public:
+		static VertexArray* m_vao;
 
-	SpriteRenderer(const std::string& n) : Component(n) {}
+		Texture texture;
+		Shader shader;
 
-	void Start() override { Prepare(); }
-	void Update(float dt) override { }
+		SpriteRenderer(const std::string& n) : Component(n) {}
 
-	void SetName(const std::string& n);
+		void Start() override { Prepare(); }
+		void Update(float dt) override { }
 
-	void Prepare();
+		void SetName(const std::string& n);
 
-	void Render(Camera& camera) override;
+		void Prepare();
 
-	void SetTexture(Texture t) { texture = t; }
-	void SetShader(Shader s) { shader = s; }
+		void Render(Camera& camera) override;
 
-	//TODO
-	//void Clean();
-};
+		void SetTexture(Texture t) { texture = t; }
+		void SetShader(Shader s) { shader = s; }
+
+		//TODO
+		//void Clean();
+	};
+}

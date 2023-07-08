@@ -9,19 +9,22 @@
 #include "transform.h"
 #include "../application/input.h"
 
-class Script : public Component
-{
-private:
+namespace Lucent {
 
-public:
-	Script(const std::string& n)
-		: Component(n)
+	class Script : public Component
 	{
-	}
+	private:
+
+	public:
+		Script(const std::string& n)
+			: Component(n)
+		{
+		}
 
 
-	virtual void Start() override {}
-	virtual void Update(float dt) override;
+		virtual void Start() override {}
+		virtual void Update(float dt) override;
 
-	void SetName(const std::string& n);
-};
+		void SetName(const std::string& n);
+	};
+}

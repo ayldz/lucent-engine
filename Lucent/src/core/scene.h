@@ -9,25 +9,28 @@
 #include "entity.h"
 #include "graphics/renderer.h"
 
-class Scene 
-{
-private:
-	std::vector<std::reference_wrapper<Entity>> m_entities;
+namespace Lucent {
 
-public:
-	Camera camera;
+	class Scene
+	{
+	private:
+		std::vector<std::reference_wrapper<Entity>> m_entities;
 
-	Scene();
-	~Scene();
+	public:
+		Camera camera;
 
-	void AddEntity( Entity& e);
-	void RemoveEntity();
+		Scene();
+		~Scene();
 
-	// Todo: void Load...
-	void S_Start();
-	void S_Update(double);
-	void S_Render();
+		void AddEntity(Entity& e);
+		void RemoveEntity();
 
-	virtual void Start() {};
-	virtual void Update(double) {};
-};
+		// Todo: void Load...
+		void S_Start();
+		void S_Update(double);
+		void S_Render();
+
+		virtual void Start() {};
+		virtual void Update(double) {};
+	};
+}
